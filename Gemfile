@@ -59,6 +59,13 @@ group :test do
 end
 gem 'rb-readline'
 gem 'awesome_print'
+gem 'devise', '~> 4.2'
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
+gem 'sassc-rails', '>= 2.0.0'
+gem 'jquery-rails'
+gem 'rest-client'
+gem 'httparty', '~> 0.13.7'
+
 
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
