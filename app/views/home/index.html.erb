@@ -4,7 +4,7 @@
 Select the Service <br>
 <%= link_to "Find Short Url",urls_long_to_short_path%> <br>
 <%= link_to "Find Long Url",urls_short_to_long_path%> <br>
-
+<right><%=link_to "SignOut",destroy_user_session_path,method: :delete%></right>
 <% else %>
 <%= link_to "SignUp",new_user_registration_path%> or 
 <%= link_to "Login",new_user_session_path%> to continue
