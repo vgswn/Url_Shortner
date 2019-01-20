@@ -6,8 +6,11 @@ class UrlsController < ApplicationController
 	    begin
 	        
 	        @entry = Url.create(:long_url=>params[:long_url])
-	        @short_url=UrlsHelper.md5hash(params[:long_url])
-	        @short_url=@prefix+UrlsController.check_collision_md5(@short_url)
+	        #@short_url=UrlsHelper.md5hash(params[:long_url])
+	        #@short_url=@prefix+UrlsController.check_collision_md5(@short_url)
+
+	        @base64=UrlsHelper.base10_base64(@entry[:id])
+	        @short_url=@prefix+UrlsHelper.generate_hash(@base64) 
 	        @entry.domain = params[:domain]
 	        @entry.long_url = params[:long_url]
 	        @entry.short_url = @short_url
