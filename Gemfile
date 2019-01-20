@@ -65,6 +65,7 @@ gem 'sassc-rails', '>= 2.0.0'
 gem 'jquery-rails'
 gem 'rest-client'
 gem 'httparty', '~> 0.13.7'
+gem 'redis-rails'
 
 
 

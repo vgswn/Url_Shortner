@@ -48,7 +48,11 @@ class UrlsController < ApplicationController
 
     	begin
 
-	     	@row = Url.where(short_url: params[:short_url]).first
+	     	@row = Rails.cache.fetch("sonof", :expires_in => 5.minutes) do
+	     		Url.where(short_url: params[:short_url]).first
+	     		puts @row.class
+	     	end
+	     	#@row=@row.first
 	     	if params[:action] == 'show_short'
 	      		return {"Status"=>"OK !","long_url"=>@row[:long_url],"domain"=>@row[:domain],"short_url"=>params[:short_url]}
 	     	else
