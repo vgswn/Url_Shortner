@@ -107,10 +107,6 @@ class UrlsController < ApplicationController
 		#uri.query = URI.encode_www_form(params)
 		@response = Net::HTTP.get_response(uri)
 		#puts res.body if res.is_a?(Net::HTTPSuccess)
-
-
-		
-
 		@result= @response.body
 		@result=JSON.parse @result
 		puts @result
