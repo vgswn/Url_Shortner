@@ -1,3 +1,7 @@
 <% @result.each do |key,value|%>
+<% unless key == "action" or key == "controller"%>
 <%= key %> : <%= value%><br>
+<% end %>
+
 <%end %>
+<center><%= link_to "Home",home_index_path%></center>
