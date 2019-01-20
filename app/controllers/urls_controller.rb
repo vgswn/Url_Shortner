@@ -45,6 +45,7 @@ class UrlsController < ApplicationController
 	    if params[:short_url].start_with?("http") == false
 	          params[:short_url]=@prefix+params[:short_url]
 	    end
+	    
 
     	begin
 
