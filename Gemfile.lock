@@ -280,6 +280,7 @@ DEPENDENCIES
   puma (~> 3.11)
   rails (~> 5.2.2)
   rb-readline
+  redis
   redis-rails
   rest-client
   sass-rails (~> 5.0)
