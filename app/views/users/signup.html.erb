@@ -1,0 +1,7 @@
+<%= form_with url: 'CreateUser',method: :post do |f| %>
+    <h5>Name : <%= f.text_field :username %><br><br> 
+    Email : <%= f.text_field :email %><br><br>
+    Password : <%= f.password_field :password %><br><br>
+    Confirm Password : <%= f.password_field :confirm_password %><br><br>
+    <%= f.submit "SignUp" %></h5>
+  <% end %>

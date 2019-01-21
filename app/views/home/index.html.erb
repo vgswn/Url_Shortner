@@ -1,13 +1,13 @@
 <center><h1>Welcome to Url Shortner<br>
-<% if user_signed_in? %>
+<% if session[:username]!= nil %>
 <h2></h2>
 Select the Service <br>
 <%= link_to "Find Short Url",urls_long_to_short_path%> <br>
 <%= link_to "Find Long Url",urls_short_to_long_path%> <br>
-<right><%=link_to "SignOut",destroy_user_session_path,method: :delete%></right>
+<%=link_to "LogOut",users_logout_path %>
 <% else %>
-<%= link_to "SignUp",new_user_registration_path%> or 
-<%= link_to "Login",new_user_session_path%> to continue
+<%= link_to "SignUp",users_signup_path%> or 
+<%= link_to "Login",users_login_path%> to continue
 <% end %>
 <p></p>
 </h1>
