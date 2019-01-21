@@ -4,19 +4,21 @@ class UrlsController < ApplicationController
 		@prefix = "https://www.vg.sw.n/"
 
 	    begin
-	        @entry = Url.create(:long_url=>params[:long_url])
+	        @entry = Url.new(:long_url=>params[:long_url])
+	        #@entry.save!
+	        #puts @entry.errors.to_s
 	        @short_url=UrlsHelper.md5hash(params[:long_url])
 	        @short_url=@prefix+UrlsController.check_collision_md5(@short_url)
 	        @entry.domain = params[:domain]
 	        @entry.long_url = params[:long_url]
 	        @entry.short_url = @short_url
-
 	        @entry.save!
 	        if params[:action] == 'show_shorten'
 	        	return {"Status"=>"Success","short_url"=> @short_url,"long_url"=>params[:long_url],"domain"=>params[:domain]}
 	        else
 	        	render json: {"Status"=>"Success","short_url"=> @short_url,"long_url"=>params[:long_url],"domain"=>params[:domain]}
 	        end
+
 	    rescue Exception => e
 
 	      @row= Url.where(long_url: params[:long_url]).first
