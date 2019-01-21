@@ -1,4 +1,5 @@
 module UrlsHelper
+	@prefix = "https://www.vg.sw.n/"
 def self.base10_base64(value)
 		arr= Array.new
 		while value > 0 do
@@ -15,6 +16,7 @@ def self.base10_base64(value)
 		end
 		return id
 	end
+	
 	def self.generate_hash(hash_value)
 		@short_url = ""
         hash_value.each do |index|
@@ -38,8 +40,10 @@ def self.base10_base64(value)
 	end
 
 	def self.md5hash(long_url)
+
 		require 'digest/md5'
 		short_url = Digest::MD5.hexdigest(long_url)
+		
 		return short_url
 
 	end

@@ -1,8 +1,27 @@
 class UrlsController < ApplicationController
 	skip_before_action :verify_authenticity_token
+
+ 
+
 	def shorten_url
-		@prefix = "https://www.vg.sw.n/"
-		session[:name]="vipul"
+		@prefix="https://www.vg.sw.n/"
+
+		@row = Url.check_url_present(url_params)
+		puts url_params
+		puts @row.to_s
+		if @row != nil
+			puts @row.instance_values
+		else
+			puts "heyy"
+			@short_url=UrlsHelper.md5hash(params[:long_url])
+			params[:short_url]=Url.check_collision_md5(short_url)
+			@row = Url.create_new_url(url_params)
+			puts @row
+		end
+
+
+
+=begin
 	    begin
 	        @entry = Url.new(:long_url=>params[:long_url])
 	        @short_url=UrlsHelper.md5hash(params[:long_url])
@@ -48,6 +67,7 @@ class UrlsController < ApplicationController
 	      end
 
 	    end
+=end
 
 	end
 
@@ -89,6 +109,16 @@ class UrlsController < ApplicationController
 
 
 	def long_to_short
+=begin
+		@row = Url.check_url_present(url,domain)
+		if @row == nil
+			@row = Url.create_new_url(url_params)
+			puts @row
+		else
+			puts @row.class
+		end
+		puts @row.update_url
+=end
 		if session[:username]== nil
 			redirect_to home_index_path
 		end
@@ -123,22 +153,13 @@ class UrlsController < ApplicationController
 		redirect_to urls_show_path(@result)
 	end
 
-	def self.check_collision_md5(short_url)
+	
 
-	    for i in 0..10 do 
+private
+	def url_params
+		puts params.permit(:domain,:long_url,:short_url)
+	end
 
-	      @check=Url.where(short_url: short_url[i,5]).first
-	      if @check == nil
-	        short_url=short_url[i,5]
-	        break
-	      
-	      end
-	    
-	    end
-
-	    return short_url
-  
-  end
 
 end
 

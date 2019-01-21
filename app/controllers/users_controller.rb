@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 	  	@user.save!
 	  	session[:username]=@user[:username]
 	  	session[:authenticate]=true
-      session[:expires_at] = Time.current + 2.minutes
+      session[:expires_at] = Time.current + 20.minutes
 	  	redirect_to home_index_path
   	rescue Exception => e
       flash[:Error] = "Email is taken"
@@ -55,7 +55,7 @@ end
   	if @user[:password] == UrlsHelper.md5hash(params[:password]).to_s
   		session[:username]=@user[:username]
 	  	session[:authenticate]=true
-      session[:expires_at] = Time.current + 2.minutes
+      session[:expires_at] = Time.current + 20.minutes
       flash[:success] = "Successful logged in"
 
 	  	redirect_to home_index_path
