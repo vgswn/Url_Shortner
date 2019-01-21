@@ -2,8 +2,9 @@ class UrlsController < ApplicationController
 	skip_before_action :verify_authenticity_token
 	def shorten_url
 		@prefix = "https://www.vg.sw.n/"
+
 	    begin
-	        @entry = Url.create(:long_url=>params[:long_url])
+	        @entry = Url.new(:long_url=>params[:long_url])
 	        puts @entry.class
 	        @short_url=UrlsHelper.md5hash(params[:long_url])
 	        @short_url=@prefix+UrlsController.check_collision_md5(@short_url)
@@ -88,21 +89,21 @@ class UrlsController < ApplicationController
 
 
 	def long_to_short
-		unless current_user
+		unless  user_signed_in?
 			redirect_to home_index_path
 		end
 
 	end
 
 	def short_to_long
-		unless current_user
+		unless user_signed_in?
 			redirect_to home_index_path
 		end
 
 	end
 
 	def show
-		unless current_user
+		unless user_signed_in?
 			redirect_to home_index_path
 		else
 			@result = params
