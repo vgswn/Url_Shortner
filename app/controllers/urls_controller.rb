@@ -1,12 +1,15 @@
 class UrlsController < ApplicationController
 	skip_before_action :verify_authenticity_token
 	def shorten_url
-		@response = Url.shorten_url(params)
-		if params[:action] == 'show_shorten'
-	        	return @response
-	    else
-	        	render json: @response
-	    end
+
+			puts "vipul"
+			@response = Url.shorten_url(params)
+			if params[:action] == 'show_shorten'
+		        	return @response
+		    else
+		        	render json: @response
+		    end
+		
 	end
 
 	def short_url
@@ -44,15 +47,28 @@ class UrlsController < ApplicationController
 
 	def show_shorten
 
-		@result = shorten_url
-		redirect_to urls_show_path(@result)
+		if params[:domain] == "" or params[:long_url] == ""
+			puts "hey vipul"
+			flash[:Error] = "Please Enter all Details"
+			redirect_to urls_long_to_short_path
+			#render home_index_path
+		else
+			@result = shorten_url
+			redirect_to urls_show_path(@result)
+	end
+
 	end
 
 
 	def show_short
-
+		if params[:short_url]==""
+			puts "hey vipul"
+			flash[:Error] = "Please Enter all Details"
+			redirect_to urls_short_to_long_path
+		else
 		@result = short_url
 		redirect_to urls_show_path(@result)
+	end
 	end
 
 	def self.check_collision_md5(short_url)
