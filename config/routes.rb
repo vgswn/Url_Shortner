@@ -16,4 +16,9 @@ Rails.application.routes.draw do
 
   post '/users/CreateUser' => 'users#create_user'
   post '/users/Login' => 'users#check_login'
+  require 'sidekiq/web'  
+mount Sidekiq::Web, :at => '/sidekiq'
+
+get 'home/generate_report'
+
 end

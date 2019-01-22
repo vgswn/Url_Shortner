@@ -4,6 +4,7 @@
 Select the Service <br>
 <%= link_to "Find Short Url",urls_long_to_short_path%> <br>
 <%= link_to "Find Long Url",urls_short_to_long_path%> <br>
+<%=link_to 'Generate Report',home_generate_report_path%><br>
 <%=link_to "LogOut",users_logout_path %>
 <% else %>
 <%= link_to "SignUp",users_signup_path%> or 

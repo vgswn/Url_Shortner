@@ -67,8 +67,7 @@ gem 'rest-client'
 gem 'httparty', '~> 0.13.7'
 gem 'redis-rails'
 gem 'redis'
-
-
+gem 'sidekiq'
 
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
