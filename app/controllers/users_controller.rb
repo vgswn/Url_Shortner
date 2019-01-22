@@ -68,9 +68,7 @@ end
     	  	session[:authenticate]=true
           session[:expires_at] = Time.current + 20.minutes
           flash[:success] = "Successful logged in"
-
     	  	redirect_to home_index_path
-
       	else
           flash[:Error] = "Email or Password is wrorng"
 

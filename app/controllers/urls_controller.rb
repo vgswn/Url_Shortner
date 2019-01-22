@@ -51,7 +51,6 @@ class UrlsController < ApplicationController
 			puts "hey vipul"
 			flash[:Error] = "Please Enter all Details"
 			redirect_to urls_long_to_short_path
-			#render home_index_path
 		else
 			@result = shorten_url
 			redirect_to urls_show_path(@result)
@@ -62,7 +61,6 @@ class UrlsController < ApplicationController
 
 	def show_short
 		if params[:short_url]==""
-			puts "hey vipul"
 			flash[:Error] = "Please Enter all Details"
 			redirect_to urls_short_to_long_path
 		else
@@ -74,7 +72,6 @@ class UrlsController < ApplicationController
 	def self.check_collision_md5(short_url)
 
 	    for i in 0..10 do 
-
 	      @check=Url.where(short_url: short_url[i,5]).first
 	      if @check == nil
 	        short_url=short_url[i,5]
