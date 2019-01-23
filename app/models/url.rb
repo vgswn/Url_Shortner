@@ -1,12 +1,13 @@
 class Url < ApplicationRecord
 	validates :long_url,uniqueness: true
+	validates :domain , presence: true
 	validates_format_of :long_url , :with => /[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}/
 	after_create :start_background_processing 
 
 	def self.shorten_url(params)
 		begin
 			@prefix = "https://www.vg.sw.n/"
-	        @entry = Url.create!(:long_url=>params[:long_url])
+	        @entry = Url.create!(params)
 	        @short_url=UrlsHelper.md5hash(params[:long_url])
 	        @short_url=@prefix+UrlsHelper.check_collision_md5(@short_url)
 			params[:short_url]=@short_url
@@ -18,6 +19,10 @@ class Url < ApplicationRecord
 	    	if e.to_s.include? "invalid"
 	    		puts e
 	    		return {"Status" => "Error","Error"=>"Enter Valid Url"}
+	    	elsif e.to_s.include? "blank"
+	    		return {"Status" => "Error","Error"=>"Enter All Params"}
+
+	    		
 
 	    	else
 		     	@row  =	Rails.cache.fetch(params[:long_url]+params[:domain], :expires_in => 5.minutes) do 
