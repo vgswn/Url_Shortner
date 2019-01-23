@@ -1,5 +1,5 @@
 <center><h1>Welcome to Url Shortner<br>
-<% if session[:username]!= nil %>
+<% if session[:authenticate]== true %>
 <h2></h2>
 Select the Service <br>
 <%= link_to "Find Short Url",urls_long_to_short_path%> <br>

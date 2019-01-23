@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   end
   def generate_report
   	@report = Report.get_report
-  	if session[:username]== nil
+  	if session[:authenticate] != true
 			render home_index_path
 	end
   end
