@@ -43,5 +43,23 @@ def self.base10_base64(value)
 		return short_url
 
 	end
+	
+	def self.check_collision_md5(short_url)
+
+	    for i in 0..10 do 
+
+	      @check=Url.where(short_url: short_url[i,5]).first
+	      if @check == nil
+	        short_url=short_url[i,5]
+	        break
+	      
+	      end
+	    
+	    end
+
+	    return short_url
+  
+  
+  	end
 end
 

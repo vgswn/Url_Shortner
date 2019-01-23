@@ -22,7 +22,6 @@ class UrlsController < ApplicationController
     	
 	end
 
-
 	def long_to_short
 		if session[:authenticate]!= true
 			redirect_to home_index_path
@@ -68,26 +67,10 @@ class UrlsController < ApplicationController
 		else
 		@result = short_url
 		redirect_to urls_show_path(@result)
+		end
 	end
-	end
 
-	def self.check_collision_md5(short_url)
-
-	    for i in 0..10 do 
-
-	      @check=Url.where(short_url: short_url[i,5]).first
-	      if @check == nil
-	        short_url=short_url[i,5]
-	        break
-	      
-	      end
-	    
-	    end
-
-	    return short_url
-  
-  
-  end
+	
 
 
 private
