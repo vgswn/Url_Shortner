@@ -10,10 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_21_113628) do
+ActiveRecord::Schema.define(version: 2019_01_23_083626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "domain_prefixes", force: :cascade do |t|
+    t.string "domain"
+    t.string "prefix"
+  end
 
   create_table "reports", force: :cascade do |t|
     t.string "date"

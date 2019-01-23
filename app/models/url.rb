@@ -8,6 +8,7 @@ class Url < ApplicationRecord
 		begin
 			@prefix = "https://www.vg.sw.n/"
 	        @entry = Url.create!(params)
+	        #@prefix = UrlsHelper.find_prefix_domain(params[domain])
 	        @short_url=UrlsHelper.md5hash(params[:long_url])
 	        @short_url=@prefix+UrlsHelper.check_collision_md5(@short_url)
 			params[:short_url]=@short_url
@@ -88,7 +89,7 @@ class Url < ApplicationRecord
   	self.update_attributes!(@hash)
   end
 
-
+  
 
 
 

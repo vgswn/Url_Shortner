@@ -24,6 +24,8 @@ class UrlsController < ApplicationController
 
 	def long_to_short
 		if session[:authenticate]!= true
+			puts "prefix"
+			puts DomainPrefixHelper.find_domain_prefix('makaan')
 			redirect_to home_index_path
 		end
 

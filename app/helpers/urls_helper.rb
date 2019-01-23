@@ -59,7 +59,8 @@ def self.base10_base64(value)
 
 	    return short_url
   
-  
   	end
+
+  	
 end
 

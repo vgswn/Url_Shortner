@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'domain_prefix/index'
   get 'users/login'
   get 'users/signup'
   get 'users/logout'
