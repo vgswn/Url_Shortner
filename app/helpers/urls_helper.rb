@@ -46,11 +46,11 @@ def self.base10_base64(value)
 	
 	def self.check_collision_md5(short_url)
 
-	    for i in 0..10 do 
+	    for i in 0..7 do 
 
-	      @check=Url.where(short_url: short_url[i,5]).first
+	      @check=Url.where(short_url: short_url[i,8]).first
 	      if @check == nil
-	        short_url=short_url[i,5]
+	        short_url=short_url[i,8]
 	        break
 	      
 	      end

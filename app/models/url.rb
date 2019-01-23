@@ -10,11 +10,11 @@ class Url < ApplicationRecord
 	        @entry = Url.create!(params)
 	        @prefix = DomainPrefixHelper.find_domain_prefix(params[:domain])
 	        @short_url=UrlsHelper.md5hash(params[:long_url])
-	        @short_url=@prefix+UrlsHelper.check_collision_md5(@short_url)
+	        @short_url=UrlsHelper.check_collision_md5(@short_url)
 			params[:short_url]=@short_url
 			@entry.update_attributes(params)
 
-	        return {"Status"=>"Success","short_url"=> @short_url,"long_url"=>params[:long_url],"domain"=>params[:domain]}
+	        return {"Status"=>"Success","short_url"=> @prefix+@short_url,"long_url"=>params[:long_url],"domain"=>params[:domain]}
 
 	    rescue Exception => e
 	    	if e.to_s.include? "invalid"
@@ -40,15 +40,17 @@ class Url < ApplicationRecord
 	end
 
 	def self.short_url(params)
-		@prefix = "https://www.vg.sw.n/"
-	    if params[:short_url].start_with?("http") == false
-	          params[:short_url]=@prefix+params[:short_url]
+	    if params[:short_url].include?("/") == true
+	          params[:short_url]=params[:short_url].split('/').last
 	    end
+
     	begin
 	     	@row=	Rails.cache.fetch(params[:short_url], :expires_in => 5.minutes) do
 	     			Url.where(short_url: params[:short_url]).first
 	     			end
-	     	return {"Status"=>"OK !","long_url"=>@row[:long_url],"domain"=>@row[:domain],"short_url"=>params[:short_url]}
+	     	@prefix = DomainPrefixHelper.find_domain_prefix(@row[:domain])
+
+	     	return {"Status"=>"OK !","long_url"=>@row[:long_url],"domain"=>@row[:domain],"short_url"=>@prefix+params[:short_url]}
     	rescue Exception => e
     		return {"Status"=>"Nothing Found !"}
     	end	

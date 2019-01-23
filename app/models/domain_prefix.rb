@@ -19,4 +19,5 @@ class DomainPrefix < ApplicationRecord
   def self.create_entry(params)
     DomainPrefix.create(params)
   end
+  
 end
