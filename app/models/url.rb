@@ -72,6 +72,7 @@ class Url < ApplicationRecord
 
 
 
+
   def update_row(params)
   	@key = Array.new
   	@value = Array.new
@@ -92,7 +93,7 @@ class Url < ApplicationRecord
   end
 
   
-  
+
 
 
 
