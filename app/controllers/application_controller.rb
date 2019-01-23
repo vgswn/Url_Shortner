@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
 def set_cache_headers
 	puts "here here"
 	if session[:expires_at] != nil
-
 	    if session[:expires_at] < Time.current
 		    session[:username]=nil
 		  	session[:authenticate]=false
@@ -11,7 +10,6 @@ def set_cache_headers
 		  	#redirect_to home_index_path
 	     end
 	 end
-
 end
 
 end
