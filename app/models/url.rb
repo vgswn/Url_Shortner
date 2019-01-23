@@ -26,14 +26,18 @@ class Url < ApplicationRecord
 	    		
 
 	    	else
-		     	@row  =	Rails.cache.fetch(params[:long_url]+params[:domain], :expires_in => 5.minutes) do 
+		     	@row  =	Rails.cache.fetch(params[:long_url], :expires_in => 5.minutes) do 
 		      			Url.where(long_url: params[:long_url]).first
 		  				end
+		  		@prefix= Rails.cache.fetch(@row[:domain], :expires_in => 5.minutes) do 
+		  				 DomainPrefixHelper.find_domain_prefix(@row[:domain])
+		  				 end
+
 		      	if @row[:short_url] == nil
 		      	#@row.destroy
 		      		return {"Status" => "Error","Error"=>"Something Went Wrong"}
 		      	else
-		      		return {"Status"=>"Already Exists","short_url"=>@row[:short_url],"long_url"=>@row[:long_url],"domain"=>@row[:domain]}
+		      		return {"Status"=>"Already Exists","short_url"=>@prefix+@row[:short_url],"long_url"=>@row[:long_url],"domain"=>@row[:domain]}
 		      	end
 		    end
 	    end
@@ -43,13 +47,14 @@ class Url < ApplicationRecord
 	    if params[:short_url].include?("/") == true
 	          params[:short_url]=params[:short_url].split('/').last
 	    end
-
     	begin
 	     	@row=	Rails.cache.fetch(params[:short_url], :expires_in => 5.minutes) do
 	     			Url.where(short_url: params[:short_url]).first
 	     			end
-	     	@prefix = DomainPrefixHelper.find_domain_prefix(@row[:domain])
-
+	     	@prefix= Rails.cache.fetch(@row[:domain], :expires_in => 5.minutes) do 
+		  			 DomainPrefixHelper.find_domain_prefix(@row[:domain])
+		  			 end
+		  	puts @prefix
 	     	return {"Status"=>"OK !","long_url"=>@row[:long_url],"domain"=>@row[:domain],"short_url"=>@prefix+params[:short_url]}
     	rescue Exception => e
     		return {"Status"=>"Nothing Found !"}

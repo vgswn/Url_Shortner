@@ -1,6 +1,6 @@
 module DomainPrefixHelper
 	def self.find_domain_prefix(domain)
-
+    puts "inside helper"
 		@url = "www."
 		@response = DomainPrefix.check_domain(domain)
 		if @response != false

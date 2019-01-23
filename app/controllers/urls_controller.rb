@@ -16,7 +16,8 @@ class UrlsController < ApplicationController
 		@response = Url.short_url(params)
 		if params[:action] == 'show_short'
 	        	return @response
-	    else
+	    else	
+	    		
 	        	render json: @response
 	    end
     	
