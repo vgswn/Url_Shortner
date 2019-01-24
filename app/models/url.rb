@@ -7,12 +7,34 @@ class Url < ApplicationRecord
 	include Elasticsearch::Model::Callbacks
 	index_name([Rails.env,base_class.to_s.pluralize.underscore].join('_'))
 
+	#mappings dynamic: 'false' do
+     #indexes :domain, type: 'string'
+    # indexes :long_url,type: 'string'
+   #  indexes :short_url,type: 'string'
+  # end
+
 	
 	def as_indexed_json(options={})
 	  	as_json(
 	    	only: [:long_url, :short_url,:domain]
 	  		)
 	end
+
+	def self.auto_complete(q)
+    return nil if q.blank?
+
+    search_definition = {
+      'name-suggest' => {
+        text: q,
+        completion: {
+          field: 'suggest'
+        }
+      }
+    }
+
+    __elasticsearch__.client.perform_request('GET', "#{index_name}/_suggest", {}, search_definition).body['name-suggest'].first['options']
+  end
+
 
 	def self.shorten_url(params)
 		begin
