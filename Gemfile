@@ -68,7 +68,8 @@ gem 'httparty', '~> 0.13.7'
 gem 'redis-rails'
 gem 'redis'
 gem 'sidekiq'
-
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

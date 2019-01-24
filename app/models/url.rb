@@ -3,6 +3,16 @@ class Url < ApplicationRecord
 	validates :domain , presence: true
 	validates_format_of :long_url , :with => /[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}/
 	after_create :start_background_processing 
+	include Elasticsearch::Model
+	include Elasticsearch::Model::Callbacks
+	index_name([Rails.env,base_class.to_s.pluralize.underscore].join('_'))
+
+	
+	def as_indexed_json(options={})
+	  	as_json(
+	    	only: [:long_url, :short_url,:domain]
+	  		)
+	end
 
 	def self.shorten_url(params)
 		begin

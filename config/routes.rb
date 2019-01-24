@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'search' => 'elastic_search#search'
   get 'domain_prefix/index'
   get 'users/login'
   get 'users/signup'
@@ -20,5 +21,7 @@ Rails.application.routes.draw do
   require 'sidekiq/web'  
 mount Sidekiq::Web, :at => '/sidekiq'
 get 'home/generate_report'
+post 'Search' => 'elastic_search#retrieve'
+get 'elastic_search/show'
 
 end
