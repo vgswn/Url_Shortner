@@ -11,6 +11,11 @@
 
   <body>
     <header>
+      <%= link_to "Search" , home_index_path %>
+      <%= form_tag search_show_path, method: :get do %>
+      <%= text_field_tag :q,nil %>
+      <%end%>
+      
       
     </header>
     <% flash.each do |key, value| %>
