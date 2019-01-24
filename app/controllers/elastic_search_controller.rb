@@ -12,6 +12,7 @@ class ElasticSearchController < ApplicationController
  	
  	def retrieve
  		if session[:authenticate]!= true
+			
 			redirect_to home_index_path
 		end
  		@urls = Url.search(params[:q]).records
@@ -19,9 +20,6 @@ class ElasticSearchController < ApplicationController
 	    	flash[:error] = "Not found anything"
 	    	redirect_to search_path
  	else
-
-
-
  		@arr = Array.new
  		@urls.each do |url|
  			@arr << url.as_indexed_json
@@ -39,4 +37,7 @@ end
 			redirect_to home_index_path
 		end
 	end
+	
+
+
 end
