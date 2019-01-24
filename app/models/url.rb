@@ -20,20 +20,6 @@ class Url < ApplicationRecord
 	  		)
 	end
 
-	def self.auto_complete(q)
-    return nil if q.blank?
-
-    search_definition = {
-      'name-suggest' => {
-        text: q,
-        completion: {
-          field: 'suggest'
-        }
-      }
-    }
-
-    __elasticsearch__.client.perform_request('GET', "#{index_name}/_suggest", {}, search_definition).body['name-suggest'].first['options']
-  end
 
 
 	def self.shorten_url(params)
@@ -112,27 +98,6 @@ class Url < ApplicationRecord
 
 
 
-
-  def update_row(params)
-  	@key = Array.new
-  	@value = Array.new
-
-  	Url.column_names.each do |c|
-  		puts c
-  		if params[c]!=nil
-  			@key << c
-  			@value << params[c]
-  		end
-
-  	end
-
-
-  	@hash = {@key=>@value}
-  	puts @hash
-  	self.update_attributes!(@hash)
-  end
-
-  
 
 
 
