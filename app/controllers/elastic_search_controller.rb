@@ -20,9 +20,6 @@ class ElasticSearchController < ApplicationController
 	    	flash[:error] = "Not found anything"
 	    	redirect_to search_path
  	else
-
-
-
  		@arr = Array.new
  		@urls.each do |url|
  			@arr << url.as_indexed_json
@@ -40,4 +37,17 @@ end
 			redirect_to home_index_path
 		end
 	end
+
+	def typeahead
+	  render json: Url.search(params[:q], {
+	    fields: ["long_url"],
+	    limit: 10,
+	    load: false,
+	    misspellings: {below: 5},
+	  }).map do |url| 
+	  	{ title: url.long_url, value: url.id } 
+	  end
+end
+
+
 end
