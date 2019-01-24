@@ -48,7 +48,7 @@ class UrlsController < ApplicationController
 
 	def show_short
 		if params[:short_url]==""
-			puts "hey vipul"
+			#puts "hey vipul"
 			flash[:Error] = "Please Enter all Details"
 			redirect_to urls_short_to_long_path
 		else

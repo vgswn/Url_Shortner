@@ -12,7 +12,6 @@ class ElasticSearchController < ApplicationController
  	
  	def retrieve
  		if session[:authenticate]!= true
-			
 			redirect_to home_index_path
 		end
  		@urls = Url.search(params[:q]).records
