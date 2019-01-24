@@ -57,6 +57,8 @@ class Url < ApplicationRecord
 	end
 
 	def self.short_url(params)
+
+		params[:short_url] = params[:short_url].strip
 	    if params[:short_url].include?("/") == true
 	          params[:short_url]=params[:short_url].split('/').last
 	    end
@@ -85,11 +87,6 @@ class Url < ApplicationRecord
     #UrlWorker.perform_in(10.seconds.from_now,{post_id: self.id})
   end
 
-
-
-
-
-  
 
 
 
