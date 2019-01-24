@@ -1,26 +1,11 @@
 class UrlsController < ApplicationController
 	skip_before_action :verify_authenticity_token
 	def shorten_url
-		puts params
-		puts url_params
-			@response = Url.shorten_url(url_params)
-			if params[:action] == 'show_shorten'
-		        	return @response
-		    else
-		        	render json: @response
-		    end
-		
+			render json: Url.shorten_url(url_params)
 	end
 
 	def short_url
-		@response = Url.short_url(params)
-		if params[:action] == 'show_short'
-	        	return @response
-	    else	
-	    		
-	        	render json: @response
-	    end
-    	
+		render json: Url.short_url(params)
 	end
 
 	def long_to_short
@@ -54,7 +39,7 @@ class UrlsController < ApplicationController
 			redirect_to urls_long_to_short_path
 			#render home_index_path
 		else
-			@result = shorten_url
+			@result = Url.shorten_url(url_params)
 			redirect_to urls_show_path(@result)
 	end
 
@@ -67,7 +52,7 @@ class UrlsController < ApplicationController
 			flash[:Error] = "Please Enter all Details"
 			redirect_to urls_short_to_long_path
 		else
-		@result = short_url
+		@result = Url.short_url(params)
 		redirect_to urls_show_path(@result)
 		end
 	end

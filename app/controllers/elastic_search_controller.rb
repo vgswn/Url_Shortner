@@ -8,6 +8,8 @@ class ElasticSearchController < ApplicationController
  		puts params
  		@urls = params["array"]
  	end
+
+ 	
  	def retrieve
  		if session[:authenticate]!= true
 			
