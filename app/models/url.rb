@@ -1,4 +1,6 @@
 class Url < ApplicationRecord
+	include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
 	validates :long_url,uniqueness: true
 	validates :domain , presence: true
 	validates_format_of :long_url , :with => /[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}/

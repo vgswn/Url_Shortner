@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'search/show'
   get 'domain_prefix/index'
   get 'users/login'
   get 'users/signup'
@@ -20,5 +21,11 @@ Rails.application.routes.draw do
   require 'sidekiq/web'  
 mount Sidekiq::Web, :at => '/sidekiq'
 get 'home/generate_report'
+get 'search' => 'search#search'
+resources :search do
+  collection do
+    get :autocomplete
+  end
+end
 
 end

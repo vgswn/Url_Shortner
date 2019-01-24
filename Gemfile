@@ -49,7 +49,9 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
-
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+gem 'jquery-ui-rails'
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
@@ -68,7 +70,7 @@ gem 'httparty', '~> 0.13.7'
 gem 'redis-rails'
 gem 'redis'
 gem 'sidekiq'
-
+gem 'searchkick', '~> 3.1', '>= 3.1.2'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
