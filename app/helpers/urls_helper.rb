@@ -50,6 +50,7 @@ def self.base10_base64(value)
 	      @check=Url.where(short_url: short_url[i,7]).first
 	      if @check == nil
 	        short_url=short_url[i,7]
+	        return short_url
 	        break
 	      
 	      end
@@ -59,6 +60,7 @@ def self.base10_base64(value)
 	      @check=Url.where(short_url: short_url[i,8]).first
 	      if @check == nil
 	        short_url=short_url[i,8]
+	        return short_url
 	        break
 	      
 	      end
@@ -69,6 +71,7 @@ def self.base10_base64(value)
 	      @check=Url.where(short_url: short_url[i,9]).first
 	      if @check == nil
 	        short_url=short_url[i,9]
+	        return short_url
 	        break
 	      
 	      end
