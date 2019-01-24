@@ -1,23 +1,29 @@
 class ElasticSearchController < ApplicationController
  	
  	def show
+ 		if session[:authenticate]!= true
+			
+			redirect_to home_index_path
+		end
  		puts params
  		@urls = params["array"]
  	end
  	def retrieve
- 		@urls = Url.search(params[:q]).records.ids
- 		if @urls.empty?
+ 		if session[:authenticate]!= true
+			
+			redirect_to home_index_path
+		end
+ 		@urls = Url.search(params[:q]).records
+ 		if @urls.first ==nil
 	    	flash[:error] = "Not found anything"
 	    	redirect_to search_path
  	else
+
+
+
  		@arr = Array.new
  		@urls.each do |url|
- 			@row = Url.find(url)
- 			@temp= Hash.new
- 			@temp[:long_url] = @row[:long_url]
- 			@temp[:short_url] = @row[:short_url]
- 			@temp[:domain] = @row[:domain]
- 			@arr << @temp
+ 			@arr << url.as_indexed_json
  		end
  		@hash = Hash.new
  		@hash["array"] = @arr
@@ -27,6 +33,9 @@ class ElasticSearchController < ApplicationController
 end
 
  	def search
- 		
+ 		if session[:authenticate]!= true
+			
+			redirect_to home_index_path
+		end
 	end
 end
