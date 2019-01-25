@@ -7,12 +7,10 @@ class Url < ApplicationRecord
 	include Elasticsearch::Model::Callbacks
 	index_name([Rails.env,base_class.to_s.pluralize.underscore].join('_'))
 
-	#mappings dynamic: 'false' do
-     #indexes :domain, type: 'string'
-    # indexes :long_url,type: 'string'
-   #  indexes :short_url,type: 'string'
-  # end
 
+	mapping do
+    indexes :short_url, type: 'text'
+  end
 	
 	def as_indexed_json(options={})
 	  	as_json(

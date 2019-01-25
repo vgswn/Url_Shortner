@@ -8,4 +8,5 @@ class HomeController < ApplicationController
 			render home_index_path
 	end
   end
+  
 end

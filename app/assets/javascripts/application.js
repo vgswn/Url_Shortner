@@ -15,4 +15,6 @@
 //= require turbolinks
 //= require_tree .
 //= require jquery
+//= require jquery-ui
+//= require typeahead.bundle
 //= require bootstrap-sprockets

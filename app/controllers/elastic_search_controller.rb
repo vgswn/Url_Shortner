@@ -14,7 +14,15 @@ class ElasticSearchController < ApplicationController
  		if session[:authenticate]!= true
 			redirect_to home_index_path
 		end
- 		@urls = Url.search(params[:q]).records
+		params[:q] = "*"+ params[:q] + "*"
+ 		@urls = Url.__elasticsearch__.search(
+		      query: {
+		        multi_match: {
+		          query: params[:q],
+		          fields: ['short_url']
+		        }
+		      }
+		    ).records
  		if @urls.first ==nil
 	    	flash[:error] = "Not found anything"
 	    	redirect_to search_path
@@ -32,6 +40,9 @@ class ElasticSearchController < ApplicationController
  		redirect_to elastic_search_show_path(@hash)
  	end
 end
+	def autocomplete
+		render json: ["test "]
+	end
 
  	def search
  		if session[:authenticate]!= true
