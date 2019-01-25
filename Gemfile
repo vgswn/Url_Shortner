@@ -49,9 +49,11 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
-gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
-gem 'jquery-ui-rails'
+group :development do
+  gem 'dotenv-rails'
+end
+gem 'select2-rails'
+gem 'underscore-rails'
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
@@ -64,13 +66,18 @@ gem 'awesome_print'
 gem 'devise', '~> 4.2'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'sassc-rails', '>= 2.0.0'
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.1'
 gem 'rest-client'
 gem 'httparty', '~> 0.13.7'
 gem 'redis-rails'
 gem 'redis'
 gem 'sidekiq'
 gem 'searchkick', '~> 3.1', '>= 3.1.2'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
+gem 'rails-jquery-autocomplete'
+
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

@@ -1,7 +1,19 @@
 class SearchController < ApplicationController
   def show
-  	@urls = Url.search(params.fetch(:q,"*"))
+  	query = params[:q]
+  	if query == ''
+  		@urls = Url.all
+  	else
+  		@urls = Url.search(params[:q])
   end
+end
+
   def search
+
+  end
+
+  def autocomplete
+  	puts "hey"
+  	render json: ["Test"]
   end
 end

@@ -1,5 +1,6 @@
 <%= link_to "Search" , home_index_path %>
       <%= form_tag search_show_path, method: :get do %>
-      <%= text_field_tag :q,nil %>
+      <%= text_field_tag :query %>
+      <%= javascript_include_tag 'search', 'data-turbolinks-track': 'reload' %>
+
       <%end%>
-      

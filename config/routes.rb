@@ -22,10 +22,7 @@ Rails.application.routes.draw do
 mount Sidekiq::Web, :at => '/sidekiq'
 get 'home/generate_report'
 get 'search' => 'search#search'
-resources :search do
-  collection do
-    get :autocomplete
-  end
-end
+get '/autocomplete' => 'search#autocomplete'
+
 
 end
