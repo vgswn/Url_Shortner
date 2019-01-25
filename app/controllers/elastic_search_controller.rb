@@ -14,14 +14,16 @@ class ElasticSearchController < ApplicationController
  		if session[:authenticate]!= true
 			redirect_to home_index_path
 		end
-		params[:q] = "*"+ params[:q] + "*"
+		params[:q]="*"+params[:q]+"*"
  		@urls = Url.__elasticsearch__.search(
-		      query: {
-		        multi_match: {
-		          query: params[:q],
-		          fields: ['short_url']
-		        }
-		      }
+		      {
+			    query: {
+			        query_string: {
+			            query: params[:q],
+			            default_field: 'short_url'
+			        }
+			    }
+				}
 		    ).records
  		if @urls.first ==nil
 	    	flash[:error] = "Not found anything"
