@@ -15,7 +15,14 @@ class ElasticSearchController < ApplicationController
 			
 			redirect_to home_index_path
 		end
- 		@urls = Url.search(params[:q]).records
+		@urls = @urls = Url.__elasticsearch__.search(
+		      query: {
+		        multi_match: {
+		          query: params[:q],
+		          fields: ['short_url']
+		        }
+		      }
+		    ).records
  		if @urls.first ==nil
 	    	flash[:error] = "Not found anything"
 	    	redirect_to search_path
