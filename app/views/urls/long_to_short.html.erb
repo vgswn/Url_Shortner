@@ -1,5 +1,5 @@
 <%= form_with url: 'ShowShorten' do |f| %>
-    <h5>Long Url : <%= f.text_field :long_url %><br><br> 
+    <h5>Long Url : <%= f.text_field :long_url,autocomplete: :false %><br><br> 
     Domain : <%= f.text_field :domain %><br><br>
     <%= f.submit "Generate Short Url" %></h5>
   <% end %>
