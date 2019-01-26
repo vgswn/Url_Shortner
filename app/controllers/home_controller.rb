@@ -8,4 +8,9 @@ class HomeController < ApplicationController
 			render home_index_path
 	end
   end
+ def typeahead
+  render json: ["test"]
+ #render json: {"short_url"=>"vipul"}
+
+end
 end

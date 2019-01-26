@@ -23,5 +23,8 @@ mount Sidekiq::Web, :at => '/sidekiq'
 get 'home/generate_report'
 post 'Search' => 'elastic_search#retrieve'
 get 'elastic_search/show'
+get 'home/search'
+get 'home/autocomplete' => 'home#typeahead'
+
 
 end

@@ -70,6 +70,11 @@ gem 'redis'
 gem 'sidekiq'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
+gem 'bootstrap-multiselect-rails', '~> 0.9.9'
+gem 'twitter-typeahead-rails', '~> 0.11.1'
+gem 'therubyracer', '~> 0.12.2'
+gem 'tokenizer', '~> 0.3.0'
+gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
