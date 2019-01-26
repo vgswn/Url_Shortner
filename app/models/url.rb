@@ -5,9 +5,39 @@ class Url < ApplicationRecord
 	after_create :start_background_processing 
 	include Elasticsearch::Model
 	include Elasticsearch::Model::Callbacks
-	index_name([Rails.env,base_class.to_s.pluralize.underscore].join('_'))
+	#index_name([Rails.env,base_class.to_s.pluralize.underscore].join('_'))
+	settings index: {
+    number_of_shards: 1,
+    number_of_replicas: 0,
+    analysis: {
+      analyzer: {
+        pattern: {
+          type: 'pattern',
+          pattern: "\\s|_|-|\\.",
+          lowercase: true
+        },
+        trigram: {
+          tokenizer: 'trigram'
+        }
+      },
+      tokenizer: {
+        trigram: {
+          type: 'ngram',
+          min_gram: 3,
+          max_gram: 8,
+          token_chars: ['letter', 'digit']
+        }
+      }
+    } } do
+    mapping do
+      	indexes :short_url, type: 'text', analyzer: 'english' do
+        indexes :keyword, analyzer: 'keyword'
+        indexes :pattern, analyzer: 'pattern'
+        indexes :trigram, analyzer: 'trigram'
+      end
+    end
+  end
 
-	
 	def as_indexed_json(options={})
 	  	as_json(
 	    	only: [:long_url, :short_url,:domain]
