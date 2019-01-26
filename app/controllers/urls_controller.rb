@@ -56,7 +56,27 @@ class UrlsController < ApplicationController
 		redirect_to urls_show_path(@result)
 		end
 	end
-
+def autocomplete
+		params[:term]="*"+params[:term]+"*"
+ 		@urls = Url.__elasticsearch__.search(
+		      {
+			    query: {
+			        query_string: {
+			            query: params[:term],
+			            default_field: 'short_url'
+			        }
+			    }
+				}
+		    ).records
+ 		if @urls != nil
+	 		@autocomplete = Array.new
+	 		@urls.each do |url|
+	 			@autocomplete << url.short_url
+	 		end
+	 		puts @autocomplete
+			render json: @autocomplete
+		end
+	end
 	
 
 
