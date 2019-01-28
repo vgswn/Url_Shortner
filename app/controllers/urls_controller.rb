@@ -64,8 +64,12 @@ def autocomplete
 	 		@urls.each do |url|
 	 			@autocomplete << url.short_url
 	 		end
-	 		puts @autocomplete
-			render json: @autocomplete
+	 		if @autocomplete.any?
+				render json: @autocomplete
+			else
+				render json: ["Unable to find anything"]
+			end
+			
 		end
 	end
 
