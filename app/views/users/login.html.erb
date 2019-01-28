@@ -1,0 +1,8 @@
+<center>
+<%= form_with url: 'Login',method: :post do |f| %>
+    <h5>Email : <%= f.text_field :email %><br><br>
+    Password : <%= f.password_field :password %><br><br>
+    <%= f.submit "Login" %></h5>
+  <% end %>
+  <center><%= link_to "Home",home_index_path%></center>
+</center>
