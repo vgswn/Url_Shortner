@@ -24,7 +24,7 @@ class Url < ApplicationRecord
         trigram: {
           type: 'ngram',
           min_gram: 3,
-          max_gram: 8,
+          max_gram: 1000,
           token_chars: ['letter', 'digit']
         }
       }
@@ -35,9 +35,15 @@ class Url < ApplicationRecord
         indexes :pattern, analyzer: 'pattern'
         indexes :trigram, analyzer: 'trigram'
       end
-      indexes :long_url,type: 'keyword'
+     	indexes :long_url, type: 'text', analyzer: 'english' do
+        indexes :keyword, analyzer: 'keyword'
+        indexes :pattern, analyzer: 'pattern'
+        indexes :trigram, analyzer: 'trigram'
     end
+
+
   end
+end
 
 	def as_indexed_json(options={})
 	  	as_json(
@@ -110,8 +116,6 @@ class Url < ApplicationRecord
     		return {"Status"=>"Nothing Found !"}
     	end	
 	end
-
-
 
 
   def start_background_processing

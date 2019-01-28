@@ -1,5 +1,13 @@
+
+<center>
+
+  
+
 <%= form_with url: 'Search' do |f| %>
+	<%= f.select :mode, ['long_url', 'short_url']%>
+
     <h5>Search Tag : <%= f.text_field :q %><br><br> 
     <%= f.submit "Search" %></h5>
   <% end %>
   <center><%= link_to "Home",home_index_path%></center>
+</center>

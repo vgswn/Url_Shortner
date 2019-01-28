@@ -16,7 +16,28 @@ class ElasticSearchController < ApplicationController
 			redirect_to home_index_path
 		end
 		#params[:q]="*"+params[:q]+"*"
-		@urls = Url.search(params[:q]).records
+
+		puts params
+
+		#@urls = Url.search(params[:q]).records
+		@mode = params[:mode]+".trigram"
+		#binding.pry
+		@urls = Url.__elasticsearch__.search(
+			{
+			  query: {
+			      bool: {
+			          must: [
+			              {
+			                  term: {
+			                      "#{@mode}":"#{params[:q]}"
+			                  }
+			              }
+			             ]
+			      }
+			  }
+			}
+			).records
+
  		if @urls.first ==nil
 	    	flash[:error] = "Not found anything"
 	    	redirect_to search_path

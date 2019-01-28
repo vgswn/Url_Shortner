@@ -42,9 +42,7 @@ class UrlsController < ApplicationController
 			@result = Url.shorten_url(url_params)
 			redirect_to urls_show_path(@result)
 	end
-
 	end
-
 
 	def show_short
 		if params[:short_url]==""
@@ -52,18 +50,16 @@ class UrlsController < ApplicationController
 			flash[:Error] = "Please Enter all Details"
 			redirect_to urls_short_to_long_path
 		else
-		@result = Url.short_url(params)
+		@result = Url.short_url(url_params)
 		redirect_to urls_show_path(@result)
 		end
 	end
 
-	
-
-
 private
-def url_params
-	params.permit(:domain,:long_url,:short_url)
-end
+
+	def url_params
+		params.permit(:domain,:long_url,:short_url)
+	end
 
 end
 
