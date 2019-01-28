@@ -57,17 +57,8 @@ class UrlsController < ApplicationController
 		end
 	end
 def autocomplete
-		params[:term]="*"+params[:term]+"*"
- 		@urls = Url.__elasticsearch__.search(
-		      {
-			    query: {
-			        query_string: {
-			            query: params[:term],
-			            default_field: 'short_url'
-			        }
-			    }
-				}
-		    ).records
+		#params[:term]="*"+params[:term]+"*"
+ 		@urls = Url.search(params[:term]).records
  		if @urls != nil
 	 		@autocomplete = Array.new
 	 		@urls.each do |url|
@@ -77,8 +68,6 @@ def autocomplete
 			render json: @autocomplete
 		end
 	end
-	
-
 
 private
 def url_params

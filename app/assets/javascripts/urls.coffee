@@ -4,5 +4,5 @@
 jQuery => 
 	$("#short_url").autocomplete({ 
 	source: "/urls/autocomplete",
-	minLength: 1 
+	minLength: 3
 	})
