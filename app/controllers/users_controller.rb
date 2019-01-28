@@ -35,7 +35,7 @@ class UsersController < ApplicationController
 
     	if params[:password] != params[:confirm_password]
     			session[:errors]='error'
-          flash[:Error] = "Password didn't Match"
+          flash[:error] = "Password didn't Match"
     	else
         if User.sign_up(user_params) == true
           session[:authenticate]=true

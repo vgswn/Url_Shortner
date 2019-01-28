@@ -1,6 +1,5 @@
 class UrlWorker
 	include Sidekiq::Worker
-	sidekiq_options :queue => :url_queue
     def perform(*args)
     	#sleep(600) 
         puts args
