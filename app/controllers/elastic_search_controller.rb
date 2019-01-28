@@ -18,9 +18,8 @@ class ElasticSearchController < ApplicationController
 		#params[:q]="*"+params[:q]+"*"
  		@urls = Url.search(
 		      query: {
-		        multi_match: {
-		          query: params[:q],
-		          fields: ['short_url']
+		        match: {
+		          short_url: params[:q]
 		        }
 		      }
 		    ).records
