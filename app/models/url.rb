@@ -5,11 +5,37 @@ class Url < ApplicationRecord
 	after_create :start_background_processing 
 	include Elasticsearch::Model
 	include Elasticsearch::Model::Callbacks
-	index_name([Rails.env,base_class.to_s.pluralize.underscore].join('_'))
-
-
-	mapping do
-    indexes :short_url, type: 'text'
+	settings index: {
+    number_of_shards: 1,
+    number_of_replicas: 0,
+    analysis: {
+      analyzer: {
+        pattern: {
+          type: 'pattern',
+          pattern: "\\s|_|-|\\.",
+          lowercase: true
+        },
+        trigram: {
+          tokenizer: 'trigram'
+        }
+      },
+      tokenizer: {
+        trigram: {
+          type: 'ngram',
+          min_gram: 3,
+          max_gram: 8,
+          token_chars: ['letter', 'digit']
+        }
+      }
+    } } do
+    mapping do
+      	indexes :short_url, type: 'text', analyzer: 'english' do
+        indexes :keyword, analyzer: 'keyword'
+        indexes :pattern, analyzer: 'pattern'
+        indexes :trigram, analyzer: 'trigram'
+      end
+      indexes :long_url,type: 'keyword'
+    end
   end
 	
 	def as_indexed_json(options={})
@@ -91,15 +117,4 @@ class Url < ApplicationRecord
     puts "added in queue"
     #UrlWorker.perform_in(10.seconds.from_now,{post_id: self.id})
   end
-
-
-
-
-
-
-
-
-
-
-
 end
