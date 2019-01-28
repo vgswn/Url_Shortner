@@ -6,6 +6,8 @@ class Url < ApplicationRecord
 	include Elasticsearch::Model
 	include Elasticsearch::Model::Callbacks
 	#index_name([Rails.env,base_class.to_s.pluralize.underscore].join('_'))
+
+	
 	settings index: {
     number_of_shards: 1,
     number_of_replicas: 0,
