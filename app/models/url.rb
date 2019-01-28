@@ -88,6 +88,9 @@ class Url < ApplicationRecord
 	end
 
 	def self.short_url(params)
+		if params[:short_url]== nil
+			return {"Status" => "Error","Error"=>"Enter All Params"}
+			end
 
 		params[:short_url] = params[:short_url].strip
 	    if params[:short_url].include?("/") == true

@@ -1,8 +1,20 @@
+<div align="center">
+  
+<center>
+
 <%= form_with url: 'CreateUser',method: :post do |f| %>
-    <h5>Name : <%= f.text_field :username %><br><br> 
-    Email : <%= f.text_field :email %><br><br>
-    Password : <%= f.password_field :password %><br><br>
-    Confirm Password : <%= f.password_field :confirm_password %><br><br>
-    <%= f.submit "SignUp" %></h5>
-  <% end %>
+    <h5><b>
+    	Name</b>: <%= f.text_field :username %><br><br>
+    	<b>
+    	Email</b>:<%= f.text_field :email %><br><br>
+    	<b>
+    	Password</b>: <%= f.password_field :password %><br><br>
+    	<b>
+    	Confirm Password</b>:<%= f.password_field :confirm_password %><br><br>
+    	<b>
+    	<%= f.submit "SignUp" %>
+		</b></h5>
+  	<% end %>
   <center><%= link_to "Home",home_index_path%></center>
+</center>
+</div>
