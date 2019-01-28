@@ -1,7 +1,7 @@
 class Url < ApplicationRecord
 	validates :long_url,uniqueness: true
 	validates :domain , presence: true
-	validates_format_of :long_url , :with => /[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}/
+	validates_format_of :long_url , :with =>	URI::regexp(%w(http https))
 	after_create :start_background_processing 
 	include Elasticsearch::Model
 	include Elasticsearch::Model::Callbacks
@@ -118,6 +118,10 @@ end
     		return {"Status"=>"Nothing Found !"}
     	end	
 	end
+
+
+
+
 
 
   def start_background_processing

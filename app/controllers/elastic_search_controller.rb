@@ -15,11 +15,8 @@ class ElasticSearchController < ApplicationController
 			
 			redirect_to home_index_path
 		end
-		#params[:q]="*"+params[:q]+"*"
 
-		puts params
 
-		#@urls = Url.search(params[:q]).records
 		@mode = params[:mode]+".trigram"
 		#binding.pry
 		@urls = Url.__elasticsearch__.search(
