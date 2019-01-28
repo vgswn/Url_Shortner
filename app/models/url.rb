@@ -35,6 +35,7 @@ class Url < ApplicationRecord
         indexes :pattern, analyzer: 'pattern'
         indexes :trigram, analyzer: 'trigram'
       end
+      indexes :long_url,type: 'keyword'
     end
   end
 
