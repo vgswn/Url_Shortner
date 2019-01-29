@@ -41,14 +41,14 @@ class UsersController < ApplicationController
       flash[:Error] = "Please Enter all Details"
       redirect_to users_login_path
     else
-      @response = User.login(user_params)
-      if  @response == nil
+      response = User.login(user_params)
+      if  response == nil
         flash[:Error] = "Email is not registered Please Sign Up"
         session[:errors]='error'
-      elsif @response == false
+      elsif response == false
         flash[:Error] = "Email or Password is wrorng"
         session[:errors]='error'
-      elsif @response == true
+      elsif response == true
         session[:authenticate]=true
         session[:expires_at] = Time.current + 20.minutes
         flash[:success] = "Successful logged in"
