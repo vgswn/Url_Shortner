@@ -5,11 +5,11 @@ class User < ApplicationRecord
 
   def self.sign_up(params)
     begin
-      @user = User.new
-      @user.username = params[:username]
-      @user.email = params[:email]
-      @user.password = UrlsHelper.md5hash(params[:password])
-      @user.save!
+      user = User.new
+      user.username = params[:username]
+      user.email = params[:email]
+      user.password = UrlsHelper.md5hash(params[:password])
+      user.save!
       return true     
     rescue Exception => e
       return false
@@ -17,11 +17,11 @@ class User < ApplicationRecord
   end
 
   def self.login(params)
-    @user = User.where(email:params[:email]).first
-    if @user == nil
+    user = User.where(email:params[:email]).first
+    if user == nil
       return nil                
     else
-      if @user[:password] == UrlsHelper.md5hash(params[:password]).to_s
+      if user[:password] == UrlsHelper.md5hash(params[:password]).to_s
         return true
       else
         return false
