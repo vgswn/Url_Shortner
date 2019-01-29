@@ -1,9 +1,6 @@
 class ElasticSearchController < ApplicationController
   
   def show
-    if session[:authenticate]!= true
-      redirect_to home_index_path
-    end
     @urls = params["array"]
   end
 
@@ -24,9 +21,6 @@ class ElasticSearchController < ApplicationController
   end
 
   def search
-    if session[:authenticate]!= true
-      redirect_to home_index_path
-    end
   end
 
 private

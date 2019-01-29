@@ -10,23 +10,13 @@ class UrlsController < ApplicationController
   end
 
   def long_url_to_short_url
-    if session[:authenticate]!= true
-      redirect_to home_index_path
-    end
   end
 
   def short_url_to_long_url
-    if session[:authenticate]!= true
-      redirect_to home_index_path
-    end
   end
 
   def show
-    if session[:authenticate]!= true
-      redirect_to home_index_path
-    else
       @result = params
-    end
   end
 
   def convert_long_url_to_short_url

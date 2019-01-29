@@ -1,15 +1,9 @@
 class UsersController < ApplicationController
 
   def login
-    if session[:authenticate]== true
-      redirect_to home_index_path
-    end
   end
 
   def signup
-    if session[:authenticate]== true
-      redirect_to home_index_path
-    end
   end
 
   def logout
