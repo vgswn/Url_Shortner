@@ -65,9 +65,10 @@ class Url < ApplicationRecord
       return {"Status"=>"Success","short_url"=> @prefix+@short_url,"long_url"=>params[:long_url],"domain"=>params[:domain]}
 
     rescue Exception => exception
+
       if exception.to_s.include? "invalid"
         return {"Status" => "Error","Error"=>"Enter Valid Url"}
-      elsif e.to_s.include? "blank"
+      elsif exception.to_s.include? "blank"
         return {"Status" => "Error","Error"=>"Enter All Params"}
       else
         @row  =	Rails.cache.fetch(params[:long_url], :expires_in => 5.minutes) do 

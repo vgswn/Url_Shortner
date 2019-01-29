@@ -9,7 +9,7 @@ class ElasticSearchController < ApplicationController
 
   def retrieve
     @urls = Url.custom_search(search_params)
-    if @urls.first ==nil
+    if @urls.first == nil
       flash[:error] = "Not found anything"
       redirect_to search_path
     else

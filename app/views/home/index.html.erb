@@ -2,8 +2,8 @@
 <% if session[:authenticate]== true %>
 <h2></h2>
 Select the Service <br>
-<%= link_to "Find Short Url",urls_long_to_short_path%> <br>
-<%= link_to "Find Long Url",urls_short_to_long_path%> <br>
+<%= link_to "Find Short Url",urls_long_url_to_short_url_path%> <br>
+<%= link_to "Find Long Url",urls_short_url_to_long_url_path%> <br>
 <%=link_to 'Generate Report',home_generate_report_path%><br>
 <%=link_to 'Elastic Search',search_path%><br>
 

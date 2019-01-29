@@ -9,13 +9,13 @@ class UrlsController < ApplicationController
     render json: Url.short_url(params)
   end
 
-  def long_to_short
+  def long_url_to_short_url
     if session[:authenticate]!= true
       redirect_to home_index_path
     end
   end
 
-  def short_to_long
+  def short_url_to_long_url
     if session[:authenticate]!= true
       redirect_to home_index_path
     end
@@ -29,7 +29,7 @@ class UrlsController < ApplicationController
     end
   end
 
-  def show_shorten
+  def convert_long_url_to_short_url
     if params[:domain] == "" or params[:long_url] == ""
       flash[:Error] = "Please Enter all Details"
       redirect_to urls_long_to_short_path
@@ -39,7 +39,7 @@ class UrlsController < ApplicationController
     end
   end
 
-  def show_short
+  def retrieve_short_url_to_long_url
     if params[:short_url]==""
       flash[:Error] = "Please Enter all Details"
       redirect_to urls_short_to_long_path

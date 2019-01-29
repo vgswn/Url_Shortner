@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
       if session[:expires_at] < Time.current
         session[:username]=nil
         session[:authenticate]=false
+        session[:expires_at]=nil
       end
     end
   end

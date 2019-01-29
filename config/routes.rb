@@ -7,12 +7,11 @@ Rails.application.routes.draw do
   get 'users/password_change'
   get 'home/index'
   root 'home#index'
-  get 'urls/short_to_long'
-  get 'urls/long_to_short'
+  get 'urls/short_url_to_long_url'
+  get 'urls/long_url_to_short_url'
   get 'urls/show'
-  post 'urls/ShowShorten' => 'urls#show_shorten'
-  post'urls/ShowShort' => 'urls#show_short'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  post 'urls/ShowShorten' => 'urls#convert_long_url_to_short_url'
+  post'urls/ShowShort' => 'urls#retrieve_short_url_to_long_url'
   get '/short-url' => 'urls#api_get_short_url'
   post '/shorten-url' => 'urls#api_post_shorten_url'
 
