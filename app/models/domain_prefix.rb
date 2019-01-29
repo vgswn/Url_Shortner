@@ -5,7 +5,7 @@ class DomainPrefix < ApplicationRecord
     if @row
       return @row[:prefix]
     end
-    return false
+      return false
   end
 
   def self.check_prefix(prefix)
@@ -13,11 +13,10 @@ class DomainPrefix < ApplicationRecord
     if @row
       return true
     end
-    return false
+      return false
   end
 
   def self.create_entry(params)
     DomainPrefix.create(params)
   end
-  
 end
