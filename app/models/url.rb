@@ -115,8 +115,8 @@ class Url < ApplicationRecord
 
 
   def self.custom_search(params)
-  field = params[:mode]+".trigram"
-  query = params[:q] 
+  field = params[:field]+".trigram"
+  query = params[:query] 
   urls = self.__elasticsearch__.search(
   {
    query: {

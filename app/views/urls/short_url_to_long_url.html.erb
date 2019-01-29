@@ -1,5 +1,5 @@
 <center>
-<%= form_with url: 'ShowShort' do |f| %>
+<%= form_with url: 'ShowShort', method: :get, local: true   do |f| %>
     <h5>Short Url : <%= f.text_field :short_url %><br><br> 
     <%= f.submit "Find Long Url" %></h5>
   <% end %>

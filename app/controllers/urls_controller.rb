@@ -24,8 +24,9 @@ class UrlsController < ApplicationController
       flash[:Error] = "Please Enter all Details"
       redirect_to urls_long_url_to_short_url_path
     else
-      result = Url.shorten_url(url_params)
-      redirect_to urls_show_path(result)
+      @result = Url.shorten_url(url_params)
+      render '/urls/show'
+      #redirect_to urls_show_path(result)
     end
   end
 
@@ -34,8 +35,9 @@ class UrlsController < ApplicationController
       flash[:Error] = "Please Enter all Details"
       redirect_to urls_short_url_to_long_url_path
     else
-      result = Url.short_url(url_params)
-      redirect_to urls_show_path(result)
+      @result = Url.short_url(url_params)
+      render '/urls/show'
+      #redirect_to urls_show_path(result)
     end
   end
 

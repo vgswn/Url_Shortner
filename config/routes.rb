@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   get 'urls/short_url_to_long_url'
   get 'urls/long_url_to_short_url'
   get 'urls/show'
-  post 'urls/ShowShorten' => 'urls#convert_long_url_to_short_url'
-  post'urls/ShowShort' => 'urls#retrieve_short_url_to_long_url'
+  get 'urls/ShowShorten' => 'urls#convert_long_url_to_short_url'
+  get'urls/ShowShort' => 'urls#retrieve_short_url_to_long_url'
   get '/short-url' => 'urls#api_get_short_url'
   post '/shorten-url' => 'urls#api_post_shorten_url'
 
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   require 'sidekiq/web'  
 mount Sidekiq::Web, :at => '/sidekiq'
 get 'home/generate_report'
-post 'Search' => 'elastic_search#retrieve'
+get 'Search' => 'elastic_search#retrieve'
 get 'elastic_search/show'
 
 end
