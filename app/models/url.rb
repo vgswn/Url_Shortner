@@ -53,7 +53,6 @@ class Url < ApplicationRecord
 
 
   def self.shorten_url(params)
-    #Rails.cache.clear
     begin
       entry = Url.create!(params)
       prefix= Rails.cache.fetch(params[:domain], :expires_in => 5.minutes) do 
@@ -70,8 +69,10 @@ class Url < ApplicationRecord
 
       if exception.to_s.include? "invalid"
         return {"Status" => "Error","Error"=>"Enter Valid Url"}
+
       elsif exception.to_s.include? "blank"
         return {"Status" => "Error","Error"=>"Enter All Params"}
+
       else
         row  =	Rails.cache.fetch(params[:long_url], :expires_in => 5.minutes) do 
           Url.where(long_url: params[:long_url]).first
@@ -91,15 +92,6 @@ class Url < ApplicationRecord
   end
 
   def self.short_url(params)
-    if params[:short_url]== nil
-      return {"Status" => "Error","Error"=>"Enter All Params"}
-    end
-
-    params[:short_url] = params[:short_url].strip
-    if params[:short_url].include?("/") == true
-      params[:short_url]=params[:short_url].split('/').last
-    end
-
     begin
       row=	Rails.cache.fetch(params[:short_url], :expires_in => 5.minutes) do
         Url.where(short_url: params[:short_url]).first
@@ -115,21 +107,21 @@ class Url < ApplicationRecord
 
 
   def self.custom_search(params)
-  field = params[:field]+".trigram"
-  query = params[:query] 
-  urls = self.__elasticsearch__.search(
-  {
-   query: {
-    bool: {
-     must: [{
-      term: {
-       "#{field}":"#{query}"
+    field = params[:field]+".trigram"
+    query = params[:query] 
+    urls = self.__elasticsearch__.search(
+    {
+     query: {
+      bool: {
+       must: [{
+        term: {
+         "#{field}":"#{query}"
+        }
+       }]
       }
-     }]
-    }
-   }
-  }).records
-  return urls
+     }
+    }).records
+    return urls
   end
 
   def put_in_report_table_async
