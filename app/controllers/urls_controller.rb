@@ -1,27 +1,31 @@
 class UrlsController < ApplicationController
 	skip_before_action :verify_authenticity_token
-	def shorten_url
+
+
+	def api_post_shorten_url
 			render json: Url.shorten_url(url_params)
 	end
 
-	def short_url
+	def api_get_short_url
 		render json: Url.short_url(params)
 	end
 
+
+
+
 	def long_to_short
 		if session[:authenticate]!= true
-			
 			redirect_to home_index_path
 		end
-
 	end
+
 
 	def short_to_long
 		if session[:authenticate]!= true
 			redirect_to home_index_path
 		end
-
 	end
+
 
 	def show
 		if session[:authenticate]!= true
@@ -30,6 +34,8 @@ class UrlsController < ApplicationController
 			@result = params
 		end
 	end
+
+
 
 	def show_shorten
 
@@ -43,6 +49,8 @@ class UrlsController < ApplicationController
 			redirect_to urls_show_path(@result)
 	end
 	end
+
+
 
 	def show_short
 		if params[:short_url]==""

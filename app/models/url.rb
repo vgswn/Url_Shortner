@@ -2,7 +2,7 @@ class Url < ApplicationRecord
 	validates :long_url,uniqueness: true
 	validates :domain , presence: true
 	validates_format_of :long_url , :with =>	URI::regexp(%w(http https))
-	after_create :start_background_processing 
+	after_create :put_in_report_table_async 
 	include Elasticsearch::Model
 	include Elasticsearch::Model::Callbacks
 	#index_name([Rails.env,base_class.to_s.pluralize.underscore].join('_'))
@@ -74,9 +74,6 @@ end
 	    		return {"Status" => "Error","Error"=>"Enter Valid Url"}
 	    	elsif e.to_s.include? "blank"
 	    		return {"Status" => "Error","Error"=>"Enter All Params"}
-
-	    		
-
 	    	else
 		     	@row  =	Rails.cache.fetch(params[:long_url], :expires_in => 5.minutes) do 
 		      			Url.where(long_url: params[:long_url]).first
@@ -120,11 +117,31 @@ end
 	end
 
 
+  	def self.custom_search(params)
+  		@field = params[:mode]+".trigram"
+  		@query = params[:q] 
+  		@urls = self.__elasticsearch__.search(
+			{
+			  query: {
+			      bool: {
+			          must: [
+			              {
+			                  term: {
+			                      "#{@field}":"#{@query}"
+			                  }
+			              }
+			             ]
+			      }
+			  }
+			}
+			).records
+  		return @urls
+  	end
 
 
 
 
-  def start_background_processing
+  def put_in_report_table_async
   	puts "performing async"
     UrlWorker.perform_async({url_id: self.id})
     puts "added in queue"

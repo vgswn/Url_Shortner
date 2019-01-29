@@ -5,7 +5,6 @@ class ElasticSearchController < ApplicationController
 			
 			redirect_to home_index_path
 		end
- 		puts params
  		@urls = params["array"]
  	end
 
@@ -15,26 +14,7 @@ class ElasticSearchController < ApplicationController
 			
 			redirect_to home_index_path
 		end
-
-
-		@mode = params[:mode]+".trigram"
-		#binding.pry
-		@urls = Url.__elasticsearch__.search(
-			{
-			  query: {
-			      bool: {
-			          must: [
-			              {
-			                  term: {
-			                      "#{@mode}":"#{params[:q]}"
-			                  }
-			              }
-			             ]
-			      }
-			  }
-			}
-			).records
-
+		@urls = Url.custom_search(search_params)
  		if @urls.first ==nil
 	    	flash[:error] = "Not found anything"
 	    	redirect_to search_path
@@ -45,18 +25,21 @@ class ElasticSearchController < ApplicationController
  		end
  		@hash = Hash.new
  		@hash["array"] = @arr
- 		puts @hash
  		redirect_to elastic_search_show_path(@hash)
  	end
 end
 
  	def search
  		if session[:authenticate]!= true
-			
 			redirect_to home_index_path
 		end
 	end
-	
+
+private
+
+	def search_params
+		params.permit(:mode,:q)
+	end
 
 
 end

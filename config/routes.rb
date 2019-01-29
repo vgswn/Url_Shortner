@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   post 'urls/ShowShorten' => 'urls#show_shorten'
   post'urls/ShowShort' => 'urls#show_short'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  get '/short-url' => 'urls#short_url'
-  post '/shorten-url' => 'urls#shorten_url'
+  get '/short-url' => 'urls#api_get_short_url'
+  post '/shorten-url' => 'urls#api_post_shorten_url'
 
   post '/users/CreateUser' => 'users#create_user'
   post '/users/Login' => 'users#check_login'

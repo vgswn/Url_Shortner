@@ -1,13 +1,16 @@
 module DomainPrefixHelper
+
 	def self.find_domain_prefix(domain)
-    puts "inside helper"
+    #puts "inside helper"
 		@url = "www."
 		@response = DomainPrefix.check_domain(domain)
 		if @response != false
 			return @response
 		end
+
 		@params = Hash.new
 		@params[:domain]=domain
+    
 		@domain_substring = domain[1,domain.size]
 		@chars = @domain_substring.chars
   		@pool=(1..@domain_substring.size).flat_map { |n| @chars.combination(n).map(&:join) }
