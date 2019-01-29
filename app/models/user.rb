@@ -10,7 +10,7 @@ class User < ApplicationRecord
       user.email = params[:email]
       user.password = UrlsHelper.md5hash(params[:password])
       user.save!
-      return true     
+      return true
     rescue Exception => e
       return false
     end

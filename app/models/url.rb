@@ -45,13 +45,6 @@ class Url < ApplicationRecord
     end
   end
 
-  def as_indexed_json(options={})
-    as_json(
-      only: [:long_url, :short_url,:domain]
-    ) 
-  end
-
-
   def self.shorten_url(params)
     begin
       entry = Url.create!(params)

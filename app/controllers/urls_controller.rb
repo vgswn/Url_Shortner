@@ -17,7 +17,7 @@ class UrlsController < ApplicationController
   end
 
   def api_get_short_url
-    if params[:short_url]== nil
+    if !params[:short_url]
       return {"Status" => "Error","Error"=>"Enter All Params"}
     end
     params[:short_url] = params[:short_url].strip
@@ -42,6 +42,10 @@ class UrlsController < ApplicationController
       flash[:Error] = "Please Enter all Details"
       redirect_to urls_short_url_to_long_url_path
     else
+      params[:short_url] = params[:short_url].strip
+      if params[:short_url].include?("/") == true
+        params[:short_url]=params[:short_url].split('/').last
+      end
       @result = Url.short_url(url_params)
       render '/urls/show'
     end
