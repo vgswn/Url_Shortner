@@ -22,7 +22,7 @@ class UrlsController < ApplicationController
   def convert_long_url_to_short_url
     if params[:domain] == "" or params[:long_url] == ""
       flash[:Error] = "Please Enter all Details"
-      redirect_to urls_long_to_short_path
+      redirect_to urls_long_url_to_short_url_path
     else
       result = Url.shorten_url(url_params)
       redirect_to urls_show_path(result)
@@ -32,7 +32,7 @@ class UrlsController < ApplicationController
   def retrieve_short_url_to_long_url
     if params[:short_url]==""
       flash[:Error] = "Please Enter all Details"
-      redirect_to urls_short_to_long_path
+      redirect_to urls_short_url_to_long_url_path
     else
       result = Url.short_url(url_params)
       redirect_to urls_show_path(result)

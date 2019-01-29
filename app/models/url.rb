@@ -53,6 +53,7 @@ class Url < ApplicationRecord
 
 
   def self.shorten_url(params)
+    #Rails.cache.clear
     begin
       @entry = Url.create!(params)
       @prefix= Rails.cache.fetch(params[:domain], :expires_in => 5.minutes) do 
