@@ -91,6 +91,8 @@ GEM
       warden (~> 1.2.3)
     domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
+    domainatrix (0.0.11)
+      addressable
     elasticsearch (6.1.0)
       elasticsearch-api (= 6.1.0)
       elasticsearch-transport (= 6.1.0)
@@ -155,6 +157,8 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
+    normalize_url (0.0.6)
+      addressable (~> 2.3)
     orm_adapter (0.5.0)
     pg (1.1.4)
     pry (0.12.2)
@@ -302,12 +306,14 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   devise (~> 4.2)
+  domainatrix
   elasticsearch-model
   elasticsearch-rails
   httparty (~> 0.13.7)
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
+  normalize_url
   pg (>= 0.18, < 2.0)
   pry
   puma (~> 3.11)

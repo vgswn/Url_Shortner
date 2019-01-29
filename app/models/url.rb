@@ -46,7 +46,6 @@ class Url < ApplicationRecord
   end
 
   def self.shorten_url(params)
-    Rails.cache.clear
     begin
       domain_row= Rails.cache.fetch(params[:domain], :expires_in => 5.minutes) do 
         DomainPrefix.find_prefix(params[:domain])
@@ -61,8 +60,6 @@ class Url < ApplicationRecord
       params[:short_url]=short_url
       entry.update_attributes(params)
       return {"Status"=>"Success","short_url"=> prefix+short_url,"long_url"=>params[:long_url],"domain"=>params[:domain]}
-
-
     rescue Exception => exception
 
       if exception.to_s.include? "invalid"
@@ -97,9 +94,13 @@ class Url < ApplicationRecord
       row=	Rails.cache.fetch(params[:short_url], :expires_in => 5.minutes) do
         Url.where(short_url: params[:short_url]).first
       end
-      prefix= Rails.cache.fetch(row[:domain], :expires_in => 5.minutes) do 
-        DomainPrefixHelper.find_domain_prefix(row[:domain])
+      domain_row= Rails.cache.fetch(row[:domain], :expires_in => 5.minutes) do 
+        DomainPrefix.find_prefix(row[:domain])
       end
+      if domain_row == nil
+          return {"Status" => "Error","Error"=>"Enter Valid Domain"}
+        end
+        prefix = domain_row[:prefix]
       return {"Status"=>"OK !","long_url"=>row[:long_url],"domain"=>row[:domain],"short_url"=>prefix+params[:short_url]}
     rescue Exception => exception
       return {"Status"=>"Nothing Found !"}
