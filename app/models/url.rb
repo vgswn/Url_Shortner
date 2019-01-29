@@ -46,11 +46,16 @@ class Url < ApplicationRecord
   end
 
   def self.shorten_url(params)
+    Rails.cache.clear
     begin
+      domain_row= Rails.cache.fetch(params[:domain], :expires_in => 5.minutes) do 
+        DomainPrefix.find_prefix(params[:domain])
+      end
+      if domain_row == nil
+        return {"Status" => "Error","Error"=>"Enter Valid Domain"}
+      end
+      prefix = domain_row[:prefix]
       entry = Url.create!(params)
-      prefix= Rails.cache.fetch(params[:domain], :expires_in => 5.minutes) do 
-        DomainPrefixHelper.find_domain_prefix(params[:domain])
-      end	        
       short_url=UrlsHelper.md5hash(params[:long_url])
       short_url=UrlsHelper.check_collision_md5(short_url)
       params[:short_url]=short_url
@@ -70,10 +75,13 @@ class Url < ApplicationRecord
         row  =	Rails.cache.fetch(params[:long_url], :expires_in => 5.minutes) do 
           Url.where(long_url: params[:long_url]).first
         end
-        prefix= Rails.cache.fetch(params[:domain], :expires_in => 5.minutes) do 
-          DomainPrefixHelper.find_domain_prefix(row[:domain])
+        domain_row= Rails.cache.fetch(params[:domain], :expires_in => 5.minutes) do 
+          DomainPrefix.find_prefix(row[:domain])
         end
-
+        if domain_row == nil
+          return {"Status" => "Error","Error"=>"Enter Valid Domain"}
+        end
+        prefix = domain_row[:prefix]
         if row[:short_url] == nil
           row.destroy
           return {"Status" => "Error","Error"=>"Something Went Wrong"}
