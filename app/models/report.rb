@@ -4,3 +4,4 @@ class Report < ApplicationRecord
     @report = Report.all.order(:date)
   end
 end
+  
