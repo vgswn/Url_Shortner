@@ -49,21 +49,22 @@ private
   end
 
   def shorten_url(params)
-    if check_params(params).class == Hash.new.class
-      return check_params(url_params)
+    errors,val = check_params(params)
+    if !val
+      return errors
     end
     params[:long_url] = params[:long_url].strip
     params[:domain]=Domainatrix.parse(params[:long_url]).domain
-    domain_row = check_domain_valid_url(params[:domain])
-    if domain_row.class == Hash.new.class
+    domain_row,val = check_domain_valid_url(params[:domain])
+    if !val
       return domain_row
     end
     prefix = domain_row[:prefix]
     url = Url.new(params)
     url.save
     errors = url.find_errors
-    response_of_validity = check_valid_url(errors,params,prefix)
-    if response_of_validity.class == Hash.new.class
+    response_of_validity,val = check_valid_url(errors,params,prefix)
+    if !val
       return response_of_validity
     end
     short_url=UrlsHelper.md5hash(params[:long_url])
@@ -107,17 +108,17 @@ private
       return {
       status: :bad_request,
       error: "Enter params"
-      }
+      },false
     end
     params.each do |key,value|
       if value == ""
         return {
           status: :bad_request,
           error: "Enter params"
-          }
+          },false
       end
     end
-    return true
+    return {},true
   end
 
   def check_domain_valid_url(domain)
@@ -126,9 +127,9 @@ private
        return {
                   status: :bad_request,
                   error: "Enter Valid Domain or Enter Valid Url"
-              }
+              },false
       end
-      return domain_row
+      return domain_row,true
   end
 
   def check_valid_url(errors,params,prefix)
@@ -139,14 +140,14 @@ private
               short_url:prefix+url_row[:short_url],
               long_url:url_row[:long_url],
               domain:url_row[:domain]
-            }
+            },false
     elsif (errors[:long_url]).to_s.include?("invalid")
       return {
             status: :bad_request,
             error: "Enter Valid Url"
-            }
+            },false
     else
-      return true
+      return {},true
     end
   end
 end
