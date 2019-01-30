@@ -51,7 +51,10 @@ class Url < ApplicationRecord
         DomainPrefix.find_prefix(params[:domain])
       end
       if domain_row == nil
-        return {"Status" => "Error","Error"=>"Enter Valid Domain"}
+        return {
+          status: "Error",
+          error: "Enter Valid Domain"
+        }
       end
       prefix = domain_row[:prefix]
       entry = Url.create!(params)
@@ -59,15 +62,24 @@ class Url < ApplicationRecord
       short_url=UrlsHelper.check_collision_md5(short_url)
       params[:short_url]=short_url
       entry.update_attributes(params)
-      return {"Status"=>"Success","short_url"=> prefix+short_url,"long_url"=>params[:long_url],"domain"=>params[:domain]}
+      return {
+        status:"Success",
+        short_url:prefix+short_url,
+        long_url:params[:long_url],
+        domain:params[:domain]
+      }
     rescue Exception => exception
 
       if exception.to_s.include? "invalid"
-        return {"Status" => "Error","Error"=>"Enter Valid Url"}
-
+        return {
+          status:"Error",
+          error:"Enter Valid Url"
+                }
       elsif exception.to_s.include? "blank"
-        return {"Status" => "Error","Error"=>"Enter All Params"}
-
+        return {
+          status:"Error",
+          error:"Enter All Params"
+                }
       else
         row  =	Rails.cache.fetch(params[:long_url], :expires_in => 5.minutes) do 
           Url.where(long_url: params[:long_url]).first
@@ -76,14 +88,25 @@ class Url < ApplicationRecord
           DomainPrefix.find_prefix(row[:domain])
         end
         if domain_row == nil
-          return {"Status" => "Error","Error"=>"Enter Valid Domain"}
+          return {
+          status:"Error",
+          error:"Enter Valid Domain"
+                }
         end
         prefix = domain_row[:prefix]
         if row[:short_url] == nil
           row.destroy
-          return {"Status" => "Error","Error"=>"Something Went Wrong"}
+          return {
+          status:"Error",
+          error:"Something Went Wrong"
+                }
         else
-          return {"Status"=>"Already Exists","short_url"=>prefix+row[:short_url],"long_url"=>row[:long_url],"domain"=>row[:domain]}
+          return {
+            status:"Already Exists",
+            short_url:prefix+row[:short_url],
+            long_url:row[:long_url],
+            domain:row[:domain]
+          }
         end
       end
     end
