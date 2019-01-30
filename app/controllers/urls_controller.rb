@@ -11,15 +11,42 @@ class UrlsController < ApplicationController
   def show
   end
 
+=begin
+  **Common Name:** Process api post request for converting long url to short url
+  **End points:** Other services
+  **Request Type** : post
+  **Routes** : shorten_url_path
+  **url:** URI("localhost:3000/shorten-url/?long_url=https://www.makaan.com/vips")
+  **Params:** long_url,type: string ,required: yes, DESCRIPTION-> 'Long Url that needs to be converted'
+  **Content-Type:** application/json; charset=utf-8
+  **Output Type:** JSON
+  **Output Fields:** status,long_url,short_url,domain
+  **Host:** localhost:3000
+=end
+
   def api_post_shorten_url
     response = shorten_url(url_params)
     render json: response,status: response[:status]
   end
 
+=begin
+  **Common Name:** Process api get request for retrieving short url to long url
+  **End points:** Other services
+  **Request Type** : get
+  **Routes** : short_url_path
+  **url:** URI("localhost:3000/short-url?short_url=mk.com/1c2b052")
+  **Params:** short_url,type: string ,required: yes, DESCRIPTION-> 'Short Url that finds the coresponding long url'
+  **Content-Type:** application/json; charset=utf-8
+  **Output Type:** JSON
+  **Output Fields:** status,long_url,short_url,domain
+  **Host:** localhost:3000
+=end
+
   def api_get_short_url
     response = short_url(url_params)
     render json: response,status: response[:status]
   end
+
 
   def convert_long_url_to_short_url
     if params[:long_url] == ""
