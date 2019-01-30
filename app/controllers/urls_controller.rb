@@ -107,8 +107,9 @@ private
   end
 
   def short_url(params)
-    if check_params(params).class == Hash.new.class
-      return check_params(params)
+    errors,val = check_params(params)
+    if !val
+      return errors
     end
     params[:short_url] = params[:short_url].strip
     if params[:short_url].include?("/") == true
