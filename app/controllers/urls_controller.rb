@@ -15,8 +15,8 @@ class UrlsController < ApplicationController
     params[:long_url] = params[:long_url].strip
     params[:long_url]=NormalizeUrl.process(params[:long_url])
     params[:domain]=Domainatrix.parse(params[:long_url]).domain
-    puts params[:domain]
-    render json: Url.shorten_url(url_params)
+    response = Url.shorten_url(url_params)
+    render json: response , status: response[:status]
   end
 
   def api_get_short_url
@@ -27,7 +27,8 @@ class UrlsController < ApplicationController
     if params[:short_url].include?("/") == true
       params[:short_url]=params[:short_url].split('/').last
     end
-    render json: Url.short_url(url_params)
+    response = Url.short_url(url_params)
+    render json: response , status: response[:status]
   end
 
   def convert_long_url_to_short_url

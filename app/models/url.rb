@@ -52,7 +52,7 @@ class Url < ApplicationRecord
       end
       if domain_row == nil
         return {
-          status: "Error",
+          status: :bad_request,
           error: "Enter Valid Domain"
         }
       end
@@ -63,7 +63,7 @@ class Url < ApplicationRecord
       params[:short_url]=short_url
       entry.update_attributes(params)
       return {
-        status:"Success",
+        status: :accepted,
         short_url:prefix+short_url,
         long_url:params[:long_url],
         domain:params[:domain]
@@ -72,12 +72,12 @@ class Url < ApplicationRecord
 
       if exception.to_s.include? "invalid"
         return {
-          status:"Error",
+          status: :bad_request,
           error:"Enter Valid Url"
                 }
       elsif exception.to_s.include? "blank"
         return {
-          status:"Error",
+          status: :bad_request,
           error:"Enter All Params"
                 }
       else
@@ -89,7 +89,7 @@ class Url < ApplicationRecord
         end
         if domain_row == nil
           return {
-          status:"Error",
+          status: :bad_request,
           error:"Enter Valid Domain"
                 }
         end
@@ -97,12 +97,12 @@ class Url < ApplicationRecord
         if row[:short_url] == nil
           row.destroy
           return {
-          status:"Error",
+          status: :bad_request,
           error:"Something Went Wrong"
                 }
         else
           return {
-            status:"Already Exists",
+            status: :already_reported,
             short_url:prefix+row[:short_url],
             long_url:row[:long_url],
             domain:row[:domain]
@@ -120,13 +120,17 @@ class Url < ApplicationRecord
       domain_row= Rails.cache.fetch(row[:domain], :expires_in => 5.minutes) do 
         DomainPrefix.find_prefix(row[:domain])
       end
-      if domain_row == nil
-          return {"Status" => "Error","Error"=>"Enter Valid Domain"}
-        end
         prefix = domain_row[:prefix]
-      return {"Status"=>"OK !","long_url"=>row[:long_url],"domain"=>row[:domain],"short_url"=>prefix+params[:short_url]}
+      return {
+        status: :ok,
+        long_url:row[:long_url],
+        domain:row[:domain],
+        short_url:prefix+params[:short_url]
+      }
     rescue Exception => exception
-      return {"Status"=>"Nothing Found !"}
+      return {
+        status: :not_found
+        }
     end	
   end
 
