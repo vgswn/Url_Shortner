@@ -20,6 +20,8 @@ class UsersController < ApplicationController
       flash[:Error] = "Please Enter all Details"
       redirect_to users_signup_path
     else
+      params[:username] = params[:username].strip
+      params[:email] = params[:email].strip
       if params[:password] != params[:confirm_password]
         session[:errors]='error'
         flash[:error] = "Password didn't Match"
@@ -41,6 +43,7 @@ class UsersController < ApplicationController
       flash[:Error] = "Please Enter all Details"
       redirect_to users_login_path
     else
+      params[:email] = params[:email].strip
       response = User.login(user_params)
       if  response == nil
         flash[:Error] = "Email is not registered Please Sign Up"
