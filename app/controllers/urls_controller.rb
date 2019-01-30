@@ -1,7 +1,5 @@
 class UrlsController < ApplicationController
   skip_before_action :verify_authenticity_token
-
-  
   def long_url_to_short_url
   end
 
