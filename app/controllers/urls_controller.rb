@@ -30,12 +30,14 @@ class UrlsController < ApplicationController
   end
 
   def convert_long_url_to_short_url
-    if params[:domain] == "" or params[:long_url] == ""
+    #Rails.cache.clear
+    if params[:long_url] == ""
       flash[:Error] = "Please Enter all Details"
       redirect_to urls_long_url_to_short_url_path
     else
       params[:long_url]=NormalizeUrl.process(params[:long_url])
       params[:domain]=Domainatrix.parse(params[:long_url]).domain
+      puts params[:domain]
       @result = Url.shorten_url(url_params)
       render '/urls/show'
     end
