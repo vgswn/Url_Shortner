@@ -45,97 +45,11 @@ class Url < ApplicationRecord
     end
   end
 
-  def self.shorten_url(params)
-    begin
-      domain_row= Rails.cache.fetch(params[:domain], :expires_in => 5.minutes) do 
-        DomainPrefix.find_prefix(params[:domain])
-      end
-      if domain_row == nil
-        return {
-          status: :bad_request,
-          error: "Enter Valid Domain"
-        }
-      end
-      prefix = domain_row[:prefix]
-      entry = Url.create!(params)
-      short_url=UrlsHelper.md5hash(params[:long_url])
-      short_url=UrlsHelper.check_collision_md5(short_url)
-      params[:short_url]=short_url
-      entry.update_attributes(params)
-      return {
-        status: :accepted,
-        short_url:prefix+short_url,
-        long_url:params[:long_url],
-        domain:params[:domain]
-      }
-    rescue Exception => exception
-
-      if exception.to_s.include? "invalid"
-        return {
-          status: :bad_request,
-          error:"Enter Valid Url"
-                }
-      elsif exception.to_s.include? "blank"
-        return {
-          status: :bad_request,
-          error:"Enter All Params"
-                }
-      else
-        row  =	Rails.cache.fetch(params[:long_url], :expires_in => 5.minutes) do 
-          Url.where(long_url: params[:long_url]).first
-        end
-        domain_row= Rails.cache.fetch(params[:domain], :expires_in => 5.minutes) do 
-          DomainPrefix.find_prefix(row[:domain])
-        end
-        if domain_row == nil
-          return {
-          status: :bad_request,
-          error:"Enter Valid Domain"
-                }
-        end
-        prefix = domain_row[:prefix]
-        if row[:short_url] == nil
-          row.destroy
-          return {
-          status: :bad_request,
-          error:"Something Went Wrong"
-                }
-        else
-          return {
-            status: :already_reported,
-            short_url:prefix+row[:short_url],
-            long_url:row[:long_url],
-            domain:row[:domain]
-          }
-        end
-      end
-    end
+  def find_errors
+    return self.errors.messages
   end
 
-  def self.short_url(params)
-    begin
-      row=	Rails.cache.fetch(params[:short_url], :expires_in => 5.minutes) do
-        Url.where(short_url: params[:short_url]).first
-      end
-      domain_row= Rails.cache.fetch(row[:domain], :expires_in => 5.minutes) do 
-        DomainPrefix.find_prefix(row[:domain])
-      end
-        prefix = domain_row[:prefix]
-      return {
-        status: :ok,
-        long_url:row[:long_url],
-        domain:row[:domain],
-        short_url:prefix+params[:short_url]
-      }
-    rescue Exception => exception
-      return {
-        status: :not_found
-        }
-    end	
-  end
-
-
-  def self.custom_search(params)
+  def custom_search(params)
     field = params[:field]+".trigram"
     query = params[:query] 
     urls = self.__elasticsearch__.search(
