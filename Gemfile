@@ -73,6 +73,8 @@ gem 'elasticsearch-rails'
 gem 'rdoc', '~> 4.2', '>= 4.2.2'
 gem 'normalize_url'
 gem 'domainatrix'
+gem 'bootstrap-datepicker-rails'
+
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

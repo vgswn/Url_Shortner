@@ -7,8 +7,7 @@ class ElasticSearchController < ApplicationController
     if params[:query] == ""
       flash[:Error] = "Please Enter Query"
       redirect_to search_path
-    end
-  else
+    else
       params[:query] = params[:query].strip
       @urls = Url.custom_search(search_params)
       if !@urls.first

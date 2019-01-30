@@ -1,4 +1,9 @@
 <center>
+<%= form_with url: 'Report', method: :get, local: true   do |f| %>
+    <%= f.date_field :date %>
+    <%= f.submit "Search" %></h5>
+  <% end %>
+
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -15,5 +20,5 @@
   <%end%>
   </tbody>
 </table>
-<%= link_to "Home",home_index_path%>
+<%= link_to "Home",home_page_index_path%>
 </center>

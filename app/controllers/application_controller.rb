@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
         session[:username]=nil
         session[:authenticate]=false
         session[:expires_at]=nil
-        render 'home/index'
+        render home_page_index_path
       end
     end
   end

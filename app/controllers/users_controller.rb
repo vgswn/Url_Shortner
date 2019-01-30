@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   def logout
     session[:authenticate]=false
     flash[:success] = "Successful logged out"
-    redirect_to home_index_path
+    redirect_to home_page_index_path
   end
 
   def password_change
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
           session[:errors]='error'
         end
       end
-      redirect_to home_index_path
+      redirect_to home_page_index_path
     end
   end
 
@@ -56,7 +56,7 @@ class UsersController < ApplicationController
         session[:expires_at] = Time.current + 20.minutes
         flash[:success] = "Successful logged in"
       end
-      redirect_to home_index_path
+      redirect_to home_page_index_path
     end
   end
 

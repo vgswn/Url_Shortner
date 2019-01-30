@@ -1,9 +1,8 @@
 <center>
 <%= form_with url: 'Search', method: :get, local: true   do |f| %>
 	<%= f.select :field, ['long_url', 'short_url']%>
-
     <h5>Search Tag : <%= f.text_field :query %><br><br> 
     <%= f.submit "Search" %></h5>
   <% end %>
-  <center><%= link_to "Home",home_index_path%></center>
+  <center><%= link_to "Home",home_page_index_path%></center>
 </center>
