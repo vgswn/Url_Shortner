@@ -49,7 +49,7 @@ class Url < ApplicationRecord
     return self.errors.messages
   end
 
-  def custom_search(params)
+  def self.custom_search(params)
     field = params[:field]+".trigram"
     query = params[:query] 
     urls = self.__elasticsearch__.search(
@@ -71,4 +71,5 @@ class Url < ApplicationRecord
     UrlWorker.perform_async({url_id: self.id})
   end
 end
+
 
