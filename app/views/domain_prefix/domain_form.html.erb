@@ -2,7 +2,7 @@
 <%= form_with url: 'create_domain', method: :get, local: true   do |f| %>
 	Enter Domain <%= f.text_field :domain %>
     <h5>Enter Prefix : <%= f.text_field :prefix %><br><br> 
-    <%= f.submit "Search" %></h5>
+    <%= f.submit "Create" %></h5>
   <% end %>
   <center><%= link_to "Home",home_page_index_path%></center>
 </center>
