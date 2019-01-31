@@ -1,5 +1,5 @@
 <center>
-<%= form_with url: 'Login',method: :post do |f| %>
+<%= form_with url: 'Login', method: :get, local: true  do |f| %>
     <h5>Email : <%= f.text_field :email %><br><br>
     Password : <%= f.password_field :password %><br><br>
     <%= f.submit "Login" %></h5>

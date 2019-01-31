@@ -19,6 +19,7 @@ class UsersController < ApplicationController
 =end
   def logout
     session[:authenticate]=false
+    session[:expires_at]=nil
     flash[:success] = "Successful logged out"
     redirect_to home_page_index_path
   end

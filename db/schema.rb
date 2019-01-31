@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_23_083626) do
+ActiveRecord::Schema.define(version: 2019_01_31_064503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2019_01_23_083626) do
   create_table "domain_prefixes", force: :cascade do |t|
     t.string "domain"
     t.string "prefix"
+    t.index ["domain"], name: "index_domain_prefixes_on_domain"
   end
 
   create_table "reports", force: :cascade do |t|
@@ -29,12 +30,15 @@ ActiveRecord::Schema.define(version: 2019_01_23_083626) do
     t.string "long_url"
     t.string "short_url"
     t.string "domain"
+    t.index ["long_url"], name: "index_urls_on_long_url"
+    t.index ["short_url"], name: "index_urls_on_short_url"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"
     t.string "password"
+    t.index ["email"], name: "index_users_on_email"
   end
 
   create_table "views", force: :cascade do |t|

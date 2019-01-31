@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   **Common Name:** Call Back Function that Checks if Session is expired or not      
 =end
   def check_session
+    
     if session[:expires_at] != nil
       if session[:expires_at] < Time.current
         session[:username]=nil

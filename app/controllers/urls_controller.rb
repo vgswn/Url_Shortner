@@ -108,9 +108,6 @@ class UrlsController < ApplicationController
     end
   end
 
-
-
-
 private
   def url_params
     params.permit(:domain,:long_url,:short_url)
