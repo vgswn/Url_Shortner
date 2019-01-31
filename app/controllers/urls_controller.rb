@@ -153,13 +153,17 @@ private
     if params[:short_url].include?("/") == true
       params[:short_url]=params[:short_url].split('/').last
     end
-    url= Url.where(params).first
+    url= Rails.cache.fetch(params[:short_url], :expires_in => 5.minutes) do
+          Url.where(params).first
+          end
     if url.nil?
       return {
         status: :not_found
         }
     else
-      prefix = DomainPrefix.where(domain: url[:domain]).first[:prefix]
+      prefix = Rails.cache.fetch(url[:domain], :expires_in => 5.minutes) do
+        DomainPrefix.where(domain: url[:domain]).first[:prefix]
+      end
       return {
         status: :ok,
         long_url:url[:long_url],
@@ -200,7 +204,9 @@ private
 
   def check_valid_url(errors,params,prefix)
     if (errors[:long_url]).to_s.include?("already")
-        url_row = Url.where(long_url: params[:long_url]).first
+        url_row = Rails.cache.fetch(params[:long_url], :expires_in => 5.minutes) do
+        Url.where(long_url: params[:long_url]).first
+      end
         return {
               status: :already_reported,
               short_url:prefix+url_row[:short_url],
