@@ -118,6 +118,10 @@ private
     if !val
       return errors
     end
+    errors , val = check_url(params)
+    if !val
+      return errors
+    end
     params[:long_url] = params[:long_url].strip
     params[:domain]=Domainatrix.parse(params[:long_url]).domain
     domain_row,val = check_domain_valid_url(params[:domain])
@@ -218,6 +222,16 @@ private
             status: :bad_request,
             error: "Enter Valid Url"
             },false
+    else
+      return {},true
+    end
+  end
+  def check_url(params)
+    if params[:long_url].include?(" ")
+      return {
+                  status: :bad_request,
+                  error: "Enter Valid Domain or Enter Valid Url"
+              },false
     else
       return {},true
     end
