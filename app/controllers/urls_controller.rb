@@ -114,6 +114,7 @@ private
   end
 
   def shorten_url(params)
+    params[:long_url] = params[:long_url].strip
     errors,val = check_params(params)
     if !val
       return errors
@@ -122,7 +123,6 @@ private
     if !val
       return errors
     end
-    params[:long_url] = params[:long_url].strip
     params[:domain]=Domainatrix.parse(params[:long_url]).domain
     domain_row,val = check_domain_valid_url(params[:domain])
     if !val
