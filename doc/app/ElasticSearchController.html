@@ -74,10 +74,6 @@
     
     <li ><a href="#method-i-retrieve">#retrieve</a>
     
-    <li ><a href="#method-i-search">#search</a>
-    
-    <li ><a href="#method-i-show">#show</a>
-    
   </ul>
 </div>
 
@@ -123,13 +119,26 @@
 
         <div class="method-description">
           
-          
+          <p>*<strong>Author:</strong>* Vipul Kumar  </p>
+
+<p>**Common Name:** Function that gives search results using ElasticSearch </p>
+
+<p>**End points:** Other services  </p>
+
+<p>*<strong>Routes</strong>* : Search_path  </p>
+
+<p>*<strong>Params:</strong>* </p>
+
+<pre>query,type: string ,required: yes, DESCRIPTION-&gt; &#39;Query or Search Tag&#39;  
+field,type: string,required: yes,  DESCRIPTION-&gt; &#39;Field of Url in which Query has to be searched&#39;</pre>
+
+<p>*<strong>Host:</strong>* localhost:3000 </p>
           
           
 
           
           <div class="method-source-code" id="retrieve-source">
-            <pre><span class="ruby-comment"># File app/controllers/elastic_search_controller.rb, line 6</span>
+            <pre><span class="ruby-comment"># File app/controllers/elastic_search_controller.rb, line 15</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">retrieve</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:query</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span>
     <span class="ruby-identifier">flash</span>[<span class="ruby-value">:Error</span>] = <span class="ruby-string">&quot;Please Enter Query&quot;</span>
@@ -144,70 +153,6 @@
       <span class="ruby-identifier">render</span> <span class="ruby-string">&#39;show&#39;</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-search" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">search</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="search-source">
-            <pre><span class="ruby-comment"># File app/controllers/elastic_search_controller.rb, line 22</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-show" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">show</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/elastic_search_controller.rb, line 3</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">show</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

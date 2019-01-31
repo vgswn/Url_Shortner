@@ -119,13 +119,15 @@
 
         <div class="method-description">
           
-          
+          <p>*<strong>Author:</strong>* Vipul Kumar  </p>
+
+<p>**Common Name:** Call Back Function that Checks if Session is expired or not   </p>
           
           
 
           
           <div class="method-source-code" id="check_session-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 3</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check_session</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">session</span>[<span class="ruby-value">:expires_at</span>] <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">session</span>[<span class="ruby-value">:expires_at</span>] <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">current</span>

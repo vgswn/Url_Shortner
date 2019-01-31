@@ -78,13 +78,7 @@
     
     <li ><a href="#method-i-convert_long_url_to_short_url">#convert_long_url_to_short_url</a>
     
-    <li ><a href="#method-i-long_url_to_short_url">#long_url_to_short_url</a>
-    
     <li ><a href="#method-i-retrieve_short_url_to_long_url">#retrieve_short_url_to_long_url</a>
-    
-    <li ><a href="#method-i-short_url_to_long_url">#short_url_to_long_url</a>
-    
-    <li ><a href="#method-i-show">#show</a>
     
   </ul>
 </div>
@@ -131,13 +125,47 @@
 
         <div class="method-description">
           
-          <p>**Common Name:** Process api get request for retrieving short url to long url **End points:** Other services **Request Type** : get *<strong>Routes</strong>* : short_url_path *<strong>url:</strong>* URI(“localhost:3000/short-url?short_url=mk.com/1c2b052”) *<strong>Params:</strong>* short_url,type: string ,required: yes, DESCRIPTION-&gt; &#39;Short <a href="Url.html"><code>Url</code></a> that finds the coresponding long url&#39; *<strong>Content-Type:</strong>* application/json; charset=utf-8 **Output Type:** JSON **Output Fields:** status,long_url,short_url,domain *<strong>Host:</strong>* localhost:3000</p>
+          <p>*<strong>Author:</strong>* Vipul Kumar   </p>
+
+<p>*<strong>Common-Name:</strong>* Process API GET REQUEST for retrieving short url to long url   </p>
+
+<p>*<strong>End-points:</strong>* Other services   </p>
+
+<p>*<strong>Request-Type</strong>* : get   </p>
+
+<p>*<strong>Routes</strong>* : short_url_path </p>
+
+<p>*<strong>url:</strong>* URI(“localhost:3000/short-url?short_url=mk.com/1c2b052”) </p>
+
+<p>*<strong>Params:</strong>* </p>
+
+<pre>short_url,type: string ,required: yes, DESCRIPTION-&gt; &#39;Short Url that finds the coresponding long url&#39;</pre>
+
+<p>*<strong>Content-Type:</strong>* application/json; charset=utf-8   </p>
+
+<p>*<strong>Output-Type:</strong>* JSON  </p>
+
+<p>*<strong>Output-Fields:</strong>* status,long_url,short_url,domain </p>
+
+<p>*<strong>Host:</strong>* localhost:3000  </p>
+
+<p>*<strong>Sample-Get-request</strong>* -  localhost:3000/short-url?short_url=mk.com/1c2b052  </p>
+
+<p>*<strong>Sample-Response</strong>* :</p>
+
+<pre>body {
+    &quot;status&quot;: &quot;ok&quot;,
+    &quot;long_url&quot;: &quot;https://www.makaan.com&quot;,
+    &quot;domain&quot;: &quot;makaan&quot;,
+    &quot;short_url&quot;: &quot;mk.com/1c2b052&quot;
+    },
+    response: :ok</pre>
           
           
 
           
           <div class="method-source-code" id="api_get_short_url-source">
-            <pre><span class="ruby-comment"># File app/controllers/urls_controller.rb, line 45</span>
+            <pre><span class="ruby-comment"># File app/controllers/urls_controller.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">api_get_short_url</span>
   <span class="ruby-identifier">response</span> = <span class="ruby-identifier">short_url</span>(<span class="ruby-identifier">url_params</span>)
   <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-identifier">response</span>,<span class="ruby-value">status:</span> <span class="ruby-identifier">response</span>[<span class="ruby-value">:status</span>]
@@ -165,13 +193,47 @@
 
         <div class="method-description">
           
-          <p>**Common Name:** Process api post request for converting long url to short url **End points:** Other services **Request Type** : post *<strong>Routes</strong>* : shorten_url_path *<strong>url:</strong>* URI(“localhost:3000/shorten-url/?long_url=<a href="https://www.makaan.com/vips">www.makaan.com/vips</a>”) *<strong>Params:</strong>* long_url,type: string ,required: yes, DESCRIPTION-&gt; &#39;Long <a href="Url.html"><code>Url</code></a> that needs to be converted&#39; *<strong>Content-Type:</strong>* application/json; charset=utf-8 **Output Type:** JSON **Output Fields:** status,long_url,short_url,domain *<strong>Host:</strong>* localhost:3000</p>
+          <p>*<strong>Author:</strong>* Vipul Kumar  </p>
+
+<p>*<strong>Common-Name:</strong>* Process API POST REQUEST for converting long url to short url   </p>
+
+<p>*<strong>End-points:</strong>* Other services  </p>
+
+<p>*<strong>Request-Type</strong>* : post </p>
+
+<p>*<strong>Routes</strong>* : shorten_url_path    </p>
+
+<p>*<strong>url:</strong>* URI(“localhost:3000/shorten-url/?long_url=<a href="https://www.makaan.com/vips">www.makaan.com/vips</a>”) </p>
+
+<p>*<strong>Params:</strong>* </p>
+
+<pre>long_url,type: string ,required: yes, DESCRIPTION-&gt; &#39;Long Url that needs to be converted&#39;</pre>
+
+<p>*<strong>Content-Type:</strong>* application/json; charset=utf-8  </p>
+
+<p>*<strong>Output-Type:</strong>* JSON  </p>
+
+<p>*<strong>Output-Fields:</strong>* status,long_url,short_url,domain    </p>
+
+<p>*<strong>Host:</strong>* localhost:3000 </p>
+
+<p>*<strong>Sample-Post-request</strong>* -  localhost:3000/shorten-url/?long_url=<a href="https://www.makaan.com/vips">www.makaan.com/vips</a>  </p>
+
+<p>*<strong>Sample-Response</strong>* : </p>
+
+<pre>body {
+  &quot;status&quot;: &quot;already_reported&quot;,
+  &quot;short_url&quot;: &quot;mk.com/c10e594&quot;,
+  &quot;long_url&quot;: &quot;https://www.makaan.com/vips&quot;,
+  &quot;domain&quot;: &quot;makaan&quot;
+  },
+  response: :already_reported</pre>
           
           
 
           
           <div class="method-source-code" id="api_post_shorten_url-source">
-            <pre><span class="ruby-comment"># File app/controllers/urls_controller.rb, line 27</span>
+            <pre><span class="ruby-comment"># File app/controllers/urls_controller.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">api_post_shorten_url</span>
   <span class="ruby-identifier">response</span> = <span class="ruby-identifier">shorten_url</span>(<span class="ruby-identifier">url_params</span>)
   <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-identifier">response</span>,<span class="ruby-value">status:</span> <span class="ruby-identifier">response</span>[<span class="ruby-value">:status</span>]
@@ -199,13 +261,23 @@
 
         <div class="method-description">
           
-          
+          <p>*<strong>Author:</strong>* Vipul Kumar </p>
+
+<p>**Common Name:** Function for converting long url to short url for web request</p>
+
+<p>**End points:** Other services </p>
+
+<p>*<strong>Routes</strong>* : convert_long_url_to_short_url_path </p>
+
+<p>*<strong>Params:</strong>* long_url,type: string ,required: yes, DESCRIPTION-&gt; &#39;Long <a href="Url.html"><code>Url</code></a> that needs to be converted&#39; </p>
+
+<p>*<strong>Host:</strong>* localhost:3000</p>
           
           
 
           
           <div class="method-source-code" id="convert_long_url_to_short_url-source">
-            <pre><span class="ruby-comment"># File app/controllers/urls_controller.rb, line 51</span>
+            <pre><span class="ruby-comment"># File app/controllers/urls_controller.rb, line 82</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">convert_long_url_to_short_url</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:long_url</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span>
     <span class="ruby-identifier">flash</span>[<span class="ruby-value">:Error</span>] = <span class="ruby-string">&quot;Please Enter all Details&quot;</span>
@@ -215,38 +287,6 @@
     <span class="ruby-ivar">@result</span> = <span class="ruby-identifier">shorten_url</span>(<span class="ruby-identifier">url_params</span>)
     <span class="ruby-identifier">render</span> <span class="ruby-string">&#39;/urls/show&#39;</span>
   <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-long_url_to_short_url" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">long_url_to_short_url</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="long_url_to_short_url-source">
-            <pre><span class="ruby-comment"># File app/controllers/urls_controller.rb, line 5</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">long_url_to_short_url</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -271,13 +311,23 @@
 
         <div class="method-description">
           
-          
+          <p>*<strong>Author:</strong>* Vipul Kumar  </p>
+
+<p>**Common Name:** Function for converting short url to long url for web request </p>
+
+<p>**End points:** Other services  </p>
+
+<p>*<strong>Routes</strong>* : retrieve_short_url_to_long_url_path  </p>
+
+<p>*<strong>Params:</strong>* short_url,type: string ,required: yes, DESCRIPTION-&gt; &#39;Short <a href="Url.html"><code>Url</code></a> that finds the coresponding long url&#39;</p>
+
+<p>*<strong>Host:</strong>* localhost:3000 </p>
           
           
 
           
           <div class="method-source-code" id="retrieve_short_url_to_long_url-source">
-            <pre><span class="ruby-comment"># File app/controllers/urls_controller.rb, line 62</span>
+            <pre><span class="ruby-comment"># File app/controllers/urls_controller.rb, line 100</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">retrieve_short_url_to_long_url</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:short_url</span>]<span class="ruby-operator">==</span><span class="ruby-string">&quot;&quot;</span>
     <span class="ruby-identifier">flash</span>[<span class="ruby-value">:Error</span>] = <span class="ruby-string">&quot;Please Enter all Details&quot;</span>
@@ -287,70 +337,6 @@
     <span class="ruby-ivar">@result</span> = <span class="ruby-identifier">short_url</span>(<span class="ruby-identifier">url_params</span>)
     <span class="ruby-identifier">render</span> <span class="ruby-string">&#39;/urls/show&#39;</span>
   <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-short_url_to_long_url" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">short_url_to_long_url</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="short_url_to_long_url-source">
-            <pre><span class="ruby-comment"># File app/controllers/urls_controller.rb, line 8</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">short_url_to_long_url</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-show" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">show</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/urls_controller.rb, line 11</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">show</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

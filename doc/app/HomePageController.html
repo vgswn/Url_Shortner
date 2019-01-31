@@ -74,8 +74,6 @@
     
     <li ><a href="#method-i-generate_report">#generate_report</a>
     
-    <li ><a href="#method-i-index">#index</a>
-    
   </ul>
 </div>
 
@@ -121,51 +119,31 @@
 
         <div class="method-description">
           
-          
+          <p>*<strong>Author:</strong>* Vipul Kumar  </p>
+
+<p>**Common Name:** Function that gives No of Urls Created on a particular date </p>
+
+<p>**End points:** Other services  </p>
+
+<p>*<strong>Routes</strong>* : home_page_generate_report_path  </p>
+
+<p>*<strong>Params:</strong>* </p>
+
+<pre>date,type: date ,required: yes, DESCRIPTION-&gt; &#39;Date&#39;</pre>
+
+<p>*<strong>Host:</strong>* localhost:3000 </p>
           
           
 
           
           <div class="method-source-code" id="generate_report-source">
-            <pre><span class="ruby-comment"># File app/controllers/home_page_controller.rb, line 5</span>
+            <pre><span class="ruby-comment"># File app/controllers/home_page_controller.rb, line 13</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_report</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:date</span>].<span class="ruby-identifier">nil?</span>
    <span class="ruby-ivar">@report</span> = []
   <span class="ruby-keyword">else</span>
     <span class="ruby-ivar">@report</span> = <span class="ruby-constant">Report</span>.<span class="ruby-identifier">get_report</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:date</span>].<span class="ruby-identifier">to_s</span>)
   <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-index" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">index</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/home_page_controller.rb, line 2</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

@@ -1,20 +1,42 @@
 class UsersController < ApplicationController
 
-  def login
+  def login #:nodoc:
+    if session[:expires_at]!=nil
+      redirect_to home_page_index_path
+    end
   end
 
-  def signup
+  def signup #:nodoc:
+    if session[:expires_at]!=nil
+      redirect_to home_page_index_path
+    end
   end
-
+=begin
+  **Author:** Vipul Kumar     
+  **Common Name:** Function that makes user logout   
+  **End points:** Other services       
+  **Host:** localhost:3000    
+=end
   def logout
     session[:authenticate]=false
     flash[:success] = "Successful logged out"
     redirect_to home_page_index_path
   end
 
-  def password_change
+  def password_change #:nodoc:
   end
-
+=begin
+  **Author:** Vipul Kumar     
+  **Common Name:** Function that Creates User in the database    
+  **End points:** Other services     
+  **Routes** : users_CreateUser_path     
+  **Params:** 
+              username,type: string ,required: yes, DESCRIPTION-> 'Name of User'  
+              email,type: string ,required: yes, DESCRIPTION-> 'Email of User'  
+              password,type: string ,required: yes, DESCRIPTION-> 'Password of user'  
+              confirm_password,type: string ,required: yes, DESCRIPTION-> 'Confirm password token'  
+  **Host:** localhost:3000    
+=end
   def create_user
     if params[:username] == "" or params[:password] == "" or params[:confirm_password]=="" or params[:email]==""
       flash[:Error] = "Please Enter all Details"
@@ -37,7 +59,16 @@ class UsersController < ApplicationController
       redirect_to home_page_index_path
     end
   end
-
+=begin
+  **Author:** Vipul Kumar     
+  **Common Name:** Function that Checks User in the database and Permits if password matched    
+  **End points:** Other services     
+  **Routes** : users_Login_path     
+  **Params:** 
+              email,type: string ,required: yes, DESCRIPTION-> 'Email of User'  
+              password,type: string ,required: yes, DESCRIPTION-> 'Password of user'  
+  **Host:** localhost:3000    
+=end
   def check_login
     if params[:email] == "" or params[:password] == ""
       flash[:Error] = "Please Enter all Details"

@@ -1,8 +1,17 @@
 class ElasticSearchController < ApplicationController
   
-  def show
+  def show #:nodoc:
   end
-
+=begin
+  **Author:** Vipul Kumar     
+  **Common Name:** Function that gives search results using ElasticSearch    
+  **End points:** Other services     
+  **Routes** : Search_path     
+  **Params:** 
+              query,type: string ,required: yes, DESCRIPTION-> 'Query or Search Tag'  
+              field,type: string,required: yes,  DESCRIPTION-> 'Field of Url in which Query has to be searched' 
+  **Host:** localhost:3000    
+=end
   def retrieve
     if params[:query] == ""
       flash[:Error] = "Please Enter Query"
@@ -19,7 +28,7 @@ class ElasticSearchController < ApplicationController
     end
   end
 
-  def search
+  def search #:nodoc:
   end
 
 private

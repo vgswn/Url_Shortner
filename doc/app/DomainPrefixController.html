@@ -74,8 +74,6 @@
     
     <li ><a href="#method-i-create_domain">#create_domain</a>
     
-    <li ><a href="#method-i-domain_form">#domain_form</a>
-    
   </ul>
 </div>
 
@@ -121,54 +119,35 @@
 
         <div class="method-description">
           
-          
+          <p>*<strong>Author:</strong>* Vipul Kumar  </p>
+
+<p>**Common Name:** Function that creates entry in domain_prefixes table </p>
+
+<p>**End points:** Other services  </p>
+
+<p>*<strong>Routes</strong>* : domain_prefix_create_domain_path  </p>
+
+<p>*<strong>Params:</strong>* </p>
+
+<pre>domain,type: string ,required: yes, DESCRIPTION-&gt; &#39;Domain Name&#39;  
+prefix,type: string,required: yes,  DESCRIPTION-&gt; &#39;Prefix of Domain&#39;</pre>
+
+<p>*<strong>Host:</strong>* localhost:3000 </p>
           
           
 
           
           <div class="method-source-code" id="create_domain-source">
-            <pre><span class="ruby-comment"># File app/controllers/domain_prefix_controller.rb, line 5</span>
+            <pre><span class="ruby-comment"># File app/controllers/domain_prefix_controller.rb, line 15</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_domain</span>
       <span class="ruby-identifier">params</span>[<span class="ruby-value">:prefix</span>]=<span class="ruby-identifier">params</span>[<span class="ruby-value">:prefix</span>] <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/&#39;</span>
       <span class="ruby-keyword">if</span> <span class="ruby-constant">DomainPrefix</span>.<span class="ruby-identifier">create_entry</span>(<span class="ruby-identifier">domain_params</span>)
               <span class="ruby-identifier">flash</span>[<span class="ruby-value">:status</span>] = <span class="ruby-string">&quot;Created !!&quot;</span>
       <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">home_page_index_path</span>
       <span class="ruby-keyword">else</span>
-              <span class="ruby-identifier">flash</span>[<span class="ruby-value">:Error</span>] = <span class="ruby-string">&quot;Taken Try Again Either Domain or Prefix is taken&quot;</span>
+                <span class="ruby-identifier">flash</span>[<span class="ruby-value">:Error</span>] = <span class="ruby-string">&quot;Taken Try Again Either Domain or Prefix is taken&quot;</span>
       <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">domain_prefix_domain_form_path</span>
       <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-domain_form" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">domain_form</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="domain_form-source">
-            <pre><span class="ruby-comment"># File app/controllers/domain_prefix_controller.rb, line 2</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">domain_form</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

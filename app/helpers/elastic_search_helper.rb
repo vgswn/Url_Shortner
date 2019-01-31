@@ -1,2 +1,2 @@
-module ElasticSearchHelper
+module ElasticSearchHelper #:nodoc:
 end

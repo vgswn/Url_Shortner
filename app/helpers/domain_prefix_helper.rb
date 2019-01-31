@@ -1,2 +1,2 @@
-module DomainPrefixHelper
+module DomainPrefixHelper #:nodoc:
 end

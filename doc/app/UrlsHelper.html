@@ -114,13 +114,19 @@
 
         <div class="method-description">
           
-          
+          <p>*<strong>Author:</strong>* Vipul Kumar  </p>
+
+<p>**Common Name:** Function that checks collision of short url in database</p>
+
+<p>**End points:** Other services    </p>
+
+<p>*<strong>Host:</strong>* localhost:3000 </p>
           
           
 
           
           <div class="method-source-code" id="check_collision_md5-source">
-            <pre><span class="ruby-comment"># File app/helpers/urls_helper.rb, line 8</span>
+            <pre><span class="ruby-comment"># File app/helpers/urls_helper.rb, line 19</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">check_collision_md5</span>(<span class="ruby-identifier">short_url</span>)
   <span class="ruby-keyword">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">8</span> <span class="ruby-keyword">do</span> 
     <span class="ruby-identifier">check</span>=<span class="ruby-constant">Url</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">short_url:</span> <span class="ruby-identifier">short_url</span>[<span class="ruby-identifier">i</span>,<span class="ruby-value">7</span>]).<span class="ruby-identifier">first</span>
@@ -172,13 +178,19 @@
 
         <div class="method-description">
           
-          
+          <p>*<strong>Author:</strong>* Vipul Kumar  </p>
+
+<p>**Common Name:** Function that hashes long_url using md5</p>
+
+<p>**End points:** Other services    </p>
+
+<p>*<strong>Host:</strong>* localhost:3000 </p>
           
           
 
           
           <div class="method-source-code" id="md5hash-source">
-            <pre><span class="ruby-comment"># File app/helpers/urls_helper.rb, line 2</span>
+            <pre><span class="ruby-comment"># File app/helpers/urls_helper.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">md5hash</span>(<span class="ruby-identifier">long_url</span>)
   <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;digest/md5&#39;</span>
   <span class="ruby-identifier">short_url</span> = <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-identifier">long_url</span>)

@@ -1,25 +1,37 @@
 class UrlsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  def long_url_to_short_url
+
+  def long_url_to_short_url  # :nodoc:
   end
 
-  def short_url_to_long_url
+  def short_url_to_long_url  # :nodoc:
   end
 
-  def show
+  def show   # :nodoc:
   end
 
 =begin
-  **Common Name:** Process api post request for converting long url to short url
-  **End points:** Other services
-  **Request Type** : post
-  **Routes** : shorten_url_path
-  **url:** URI("localhost:3000/shorten-url/?long_url=https://www.makaan.com/vips")
-  **Params:** long_url,type: string ,required: yes, DESCRIPTION-> 'Long Url that needs to be converted'
-  **Content-Type:** application/json; charset=utf-8
-  **Output Type:** JSON
-  **Output Fields:** status,long_url,short_url,domain
-  **Host:** localhost:3000
+  **Author:** Vipul Kumar     
+  **Common-Name:** Process API POST REQUEST for converting long url to short url      
+  **End-points:** Other services     
+  **Request-Type** : post    
+  **Routes** : shorten_url_path       
+  **url:** URI("localhost:3000/shorten-url/?long_url=https://www.makaan.com/vips")    
+  **Params:** 
+            long_url,type: string ,required: yes, DESCRIPTION-> 'Long Url that needs to be converted'  
+  **Content-Type:** application/json; charset=utf-8     
+  **Output-Type:** JSON     
+  **Output-Fields:** status,long_url,short_url,domain       
+  **Host:** localhost:3000    
+  **Sample-Post-request** -  localhost:3000/shorten-url/?long_url=https://www.makaan.com/vips     
+  **Sample-Response** : 
+                body {
+                  "status": "already_reported",
+                  "short_url": "mk.com/c10e594",
+                  "long_url": "https://www.makaan.com/vips",
+                  "domain": "makaan"
+                  },
+                  response: :already_reported
 =end
 
   def api_post_shorten_url
@@ -28,16 +40,29 @@ class UrlsController < ApplicationController
   end
 
 =begin
-  **Common Name:** Process api get request for retrieving short url to long url
-  **End points:** Other services
-  **Request Type** : get
-  **Routes** : short_url_path
-  **url:** URI("localhost:3000/short-url?short_url=mk.com/1c2b052")
-  **Params:** short_url,type: string ,required: yes, DESCRIPTION-> 'Short Url that finds the coresponding long url'
-  **Content-Type:** application/json; charset=utf-8
-  **Output Type:** JSON
-  **Output Fields:** status,long_url,short_url,domain
-  **Host:** localhost:3000
+
+  **Author:** Vipul Kumar      
+  **Common-Name:** Process API GET REQUEST for retrieving short url to long url      
+  **End-points:** Other services      
+  **Request-Type** : get      
+  **Routes** : short_url_path    
+  **url:** URI("localhost:3000/short-url?short_url=mk.com/1c2b052")    
+  **Params:** 
+            short_url,type: string ,required: yes, DESCRIPTION-> 'Short Url that finds the coresponding long url'     
+  **Content-Type:** application/json; charset=utf-8      
+  **Output-Type:** JSON     
+  **Output-Fields:** status,long_url,short_url,domain    
+  **Host:** localhost:3000     
+  **Sample-Get-request** -  localhost:3000/short-url?short_url=mk.com/1c2b052     
+  **Sample-Response** :  
+                body {
+                    "status": "ok",
+                    "long_url": "https://www.makaan.com",
+                    "domain": "makaan",
+                    "short_url": "mk.com/1c2b052"
+                    },
+                    response: :ok  
+                    
 =end
 
   def api_get_short_url
@@ -45,6 +70,14 @@ class UrlsController < ApplicationController
     render json: response,status: response[:status]
   end
 
+=begin
+  **Author:** Vipul Kumar    
+  **Common Name:** Function for converting long url to short url for web request  
+  **End points:** Other services    
+  **Routes** : convert_long_url_to_short_url_path    
+  **Params:** long_url,type: string ,required: yes, DESCRIPTION-> 'Long Url that needs to be converted'    
+  **Host:** localhost:3000   
+=end
 
   def convert_long_url_to_short_url
     if params[:long_url] == ""
@@ -56,7 +89,14 @@ class UrlsController < ApplicationController
       render '/urls/show'
     end
   end
-
+=begin
+  **Author:** Vipul Kumar     
+  **Common Name:** Function for converting short url to long url for web request    
+  **End points:** Other services     
+  **Routes** : retrieve_short_url_to_long_url_path     
+  **Params:** short_url,type: string ,required: yes, DESCRIPTION-> 'Short Url that finds the coresponding long url'   
+  **Host:** localhost:3000    
+=end
   def retrieve_short_url_to_long_url
     if params[:short_url]==""
       flash[:Error] = "Please Enter all Details"
@@ -67,6 +107,9 @@ class UrlsController < ApplicationController
       render '/urls/show'
     end
   end
+
+
+
 
 private
   def url_params

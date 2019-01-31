@@ -76,13 +76,7 @@
     
     <li ><a href="#method-i-create_user">#create_user</a>
     
-    <li ><a href="#method-i-login">#login</a>
-    
     <li ><a href="#method-i-logout">#logout</a>
-    
-    <li ><a href="#method-i-password_change">#password_change</a>
-    
-    <li ><a href="#method-i-signup">#signup</a>
     
   </ul>
 </div>
@@ -129,13 +123,26 @@
 
         <div class="method-description">
           
-          
+          <p>*<strong>Author:</strong>* Vipul Kumar  </p>
+
+<p>**Common Name:** Function that Checks <a href="User.html"><code>User</code></a> in the database and Permits if password matched </p>
+
+<p>**End points:** Other services  </p>
+
+<p>*<strong>Routes</strong>* : users_Login_path  </p>
+
+<p>*<strong>Params:</strong>* </p>
+
+<pre>email,type: string ,required: yes, DESCRIPTION-&gt; &#39;Email of User&#39;  
+password,type: string ,required: yes, DESCRIPTION-&gt; &#39;Password of user&#39;</pre>
+
+<p>*<strong>Host:</strong>* localhost:3000 </p>
           
           
 
           
           <div class="method-source-code" id="check_login-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 41</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 72</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check_login</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:email</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:password</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span>
     <span class="ruby-identifier">flash</span>[<span class="ruby-value">:Error</span>] = <span class="ruby-string">&quot;Please Enter all Details&quot;</span>
@@ -180,13 +187,28 @@
 
         <div class="method-description">
           
-          
+          <p>*<strong>Author:</strong>* Vipul Kumar  </p>
+
+<p>**Common Name:** Function that Creates <a href="User.html"><code>User</code></a> in the database </p>
+
+<p>**End points:** Other services  </p>
+
+<p>*<strong>Routes</strong>* : users_CreateUser_path  </p>
+
+<p>*<strong>Params:</strong>* </p>
+
+<pre>username,type: string ,required: yes, DESCRIPTION-&gt; &#39;Name of User&#39;  
+email,type: string ,required: yes, DESCRIPTION-&gt; &#39;Email of User&#39;  
+password,type: string ,required: yes, DESCRIPTION-&gt; &#39;Password of user&#39;  
+confirm_password,type: string ,required: yes, DESCRIPTION-&gt; &#39;Confirm password token&#39;</pre>
+
+<p>*<strong>Host:</strong>* localhost:3000 </p>
           
           
 
           
           <div class="method-source-code" id="create_user-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 18</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_user</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:username</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:password</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:confirm_password</span>]<span class="ruby-operator">==</span><span class="ruby-string">&quot;&quot;</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:email</span>]<span class="ruby-operator">==</span><span class="ruby-string">&quot;&quot;</span>
     <span class="ruby-identifier">flash</span>[<span class="ruby-value">:Error</span>] = <span class="ruby-string">&quot;Please Enter all Details&quot;</span>
@@ -219,38 +241,6 @@
       </div>
 
     
-      <div id="method-i-login" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">login</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="login-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 3</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">login</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-logout" class="method-detail ">
         
         <div class="method-heading">
@@ -264,81 +254,23 @@
 
         <div class="method-description">
           
-          
+          <p>*<strong>Author:</strong>* Vipul Kumar  </p>
+
+<p>**Common Name:** Function that makes user logout</p>
+
+<p>**End points:** Other services    </p>
+
+<p>*<strong>Host:</strong>* localhost:3000 </p>
           
           
 
           
           <div class="method-source-code" id="logout-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 9</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">logout</span>
   <span class="ruby-identifier">session</span>[<span class="ruby-value">:authenticate</span>]=<span class="ruby-keyword">false</span>
   <span class="ruby-identifier">flash</span>[<span class="ruby-value">:success</span>] = <span class="ruby-string">&quot;Successful logged out&quot;</span>
   <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">home_page_index_path</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-password_change" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">password_change</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="password_change-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 15</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">password_change</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-signup" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">signup</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="signup-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 6</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">signup</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
