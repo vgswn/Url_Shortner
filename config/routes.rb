@@ -24,3 +24,4 @@ Rails.application.routes.draw do
   get 'elastic_search/show'
   get 'home_page/Report' => 'home_page#generate_report'
 end
+
