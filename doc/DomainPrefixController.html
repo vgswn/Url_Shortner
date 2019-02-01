@@ -138,7 +138,7 @@ prefix,type: string,required: yes,  DESCRIPTION-&gt; &#39;Prefix of Domain&#39;<
 
           
           <div class="method-source-code" id="create_domain-source">
-            <pre><span class="ruby-comment"># File app/controllers/domain_prefix_controller.rb, line 15</span>
+            <pre><span class="ruby-comment"># File app/controllers/domain_prefix_controller.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create_domain</span>
       <span class="ruby-identifier">params</span>[<span class="ruby-value">:prefix</span>]=<span class="ruby-identifier">params</span>[<span class="ruby-value">:prefix</span>] <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/&#39;</span>
       <span class="ruby-keyword">if</span> <span class="ruby-constant">DomainPrefix</span>.<span class="ruby-identifier">create_entry</span>(<span class="ruby-identifier">domain_params</span>)

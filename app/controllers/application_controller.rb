@@ -12,18 +12,22 @@ class ApplicationController < ActionController::Base
       session[:authenticate]=false
     end
   end
-
+=begin
+  **Author:** Vipul Kumar     
+  **Common Name:** Call Back Function that Checks if user logged in or not and redirects accordingly      
+=end
   def check_logged_in
     if session[:authenticate] == false
       render home_page_index_path
     end
   end
-
+=begin
+  **Author:** Vipul Kumar     
+  **Common Name:** Call Back Function that Checks if user logged out or not and redirects accordingly      
+=end
   def check_logged_out
     if session[:authenticate] == true
       render home_page_index_path
     end
   end
-
-
 end

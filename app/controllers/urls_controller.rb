@@ -119,8 +119,7 @@ private
     if !val
       return errors
     end
-        params[:long_url] = params[:long_url].strip
-
+    params[:long_url] = params[:long_url].strip
     errors , val = check_url(params)
     if !val
       return errors
