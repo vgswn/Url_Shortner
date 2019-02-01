@@ -1,15 +1,9 @@
 class UsersController < ApplicationController
-
+  before_action :check_logged_out,only: [:login,:signup]
   def login #:nodoc:
-    if session[:expires_at]!=nil
-      redirect_to home_page_index_path
-    end
   end
 
   def signup #:nodoc:
-    if session[:expires_at]!=nil
-      redirect_to home_page_index_path
-    end
   end
 =begin
   **Author:** Vipul Kumar     
@@ -19,7 +13,6 @@ class UsersController < ApplicationController
 =end
   def logout
     session[:authenticate]=false
-    session[:expires_at]=nil
     flash[:success] = "Successful logged out"
     redirect_to home_page_index_path
   end

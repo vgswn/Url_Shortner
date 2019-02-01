@@ -1,4 +1,5 @@
 class HomePageController < ApplicationController
+  before_action :check_logged_in,only:[:generate_report]
   def index #:nodoc:
   end
 =begin

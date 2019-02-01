@@ -1,4 +1,5 @@
 class DomainPrefixController < ApplicationController
+  before_action :check_logged_in,only:[:domain_form]
   def domain_form # :nodoc:
   end
 
