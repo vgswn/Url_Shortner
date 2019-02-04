@@ -1,6 +1,7 @@
 class UrlsController < ApplicationController
   skip_before_action :verify_authenticity_token
-
+  before_action :check_logged_in,only:[:long_url_to_short_url,:short_url_to_long_url]
+  
   def long_url_to_short_url  # :nodoc:
   end
 
@@ -118,8 +119,7 @@ private
     if !val
       return errors
     end
-        params[:long_url] = params[:long_url].strip
-
+    params[:long_url] = params[:long_url].strip
     errors , val = check_url(params)
     if !val
       return errors

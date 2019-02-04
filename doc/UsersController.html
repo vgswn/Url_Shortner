@@ -143,7 +143,7 @@ password,type: string ,required: yes, DESCRIPTION-&gt; &#39;Password of user&#39
 
           
           <div class="method-source-code" id="check_login-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 73</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">check_login</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:email</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:password</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span>
     <span class="ruby-identifier">flash</span>[<span class="ruby-value">:Error</span>] = <span class="ruby-string">&quot;Please Enter all Details&quot;</span>
@@ -210,7 +210,7 @@ confirm_password,type: string ,required: yes, DESCRIPTION-&gt; &#39;Confirm pass
 
           
           <div class="method-source-code" id="create_user-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 41</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create_user</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:username</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:password</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:confirm_password</span>]<span class="ruby-operator">==</span><span class="ruby-string">&quot;&quot;</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:email</span>]<span class="ruby-operator">==</span><span class="ruby-string">&quot;&quot;</span>
     <span class="ruby-identifier">flash</span>[<span class="ruby-value">:Error</span>] = <span class="ruby-string">&quot;Please Enter all Details&quot;</span>
@@ -268,10 +268,9 @@ confirm_password,type: string ,required: yes, DESCRIPTION-&gt; &#39;Confirm pass
 
           
           <div class="method-source-code" id="logout-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 20</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 14</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">logout</span>
   <span class="ruby-identifier">session</span>[<span class="ruby-value">:authenticate</span>]=<span class="ruby-keyword">false</span>
-  <span class="ruby-identifier">session</span>[<span class="ruby-value">:expires_at</span>]=<span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">flash</span>[<span class="ruby-value">:success</span>] = <span class="ruby-string">&quot;Successful logged out&quot;</span>
   <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">home_page_index_path</span>
 <span class="ruby-keyword">end</span></pre>

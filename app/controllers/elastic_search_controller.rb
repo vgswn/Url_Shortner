@@ -1,5 +1,5 @@
 class ElasticSearchController < ApplicationController
-  
+  before_action :check_logged_in,only:[:search]
   def show #:nodoc:
   end
 =begin

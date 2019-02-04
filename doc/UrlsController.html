@@ -168,7 +168,7 @@ localhost:3000/short-url?short_url=mk.com/1c2b052</p>
 
           
           <div class="method-source-code" id="api_get_short_url-source">
-            <pre><span class="ruby-comment"># File app/controllers/urls_controller.rb, line 68</span>
+            <pre><span class="ruby-comment"># File app/controllers/urls_controller.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">api_get_short_url</span>
   <span class="ruby-identifier">response</span> = <span class="ruby-identifier">short_url</span>(<span class="ruby-identifier">url_params</span>)
   <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-identifier">response</span>,<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-identifier">response</span>[<span class="ruby-value">:status</span>]
@@ -240,7 +240,7 @@ href="https://www.makaan.com/vips">www.makaan.com/vips</a></p>
 
           
           <div class="method-source-code" id="api_post_shorten_url-source">
-            <pre><span class="ruby-comment"># File app/controllers/urls_controller.rb, line 37</span>
+            <pre><span class="ruby-comment"># File app/controllers/urls_controller.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">api_post_shorten_url</span>
   <span class="ruby-identifier">response</span> = <span class="ruby-identifier">shorten_url</span>(<span class="ruby-identifier">url_params</span>)
   <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-identifier">response</span>,<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-identifier">response</span>[<span class="ruby-value">:status</span>]
@@ -287,7 +287,7 @@ converted&#39;</p>
 
           
           <div class="method-source-code" id="convert_long_url_to_short_url-source">
-            <pre><span class="ruby-comment"># File app/controllers/urls_controller.rb, line 82</span>
+            <pre><span class="ruby-comment"># File app/controllers/urls_controller.rb, line 83</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">convert_long_url_to_short_url</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:long_url</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span>
     <span class="ruby-identifier">flash</span>[<span class="ruby-value">:Error</span>] = <span class="ruby-string">&quot;Please Enter all Details&quot;</span>
@@ -340,7 +340,7 @@ coresponding long url&#39;</p>
 
           
           <div class="method-source-code" id="retrieve_short_url_to_long_url-source">
-            <pre><span class="ruby-comment"># File app/controllers/urls_controller.rb, line 100</span>
+            <pre><span class="ruby-comment"># File app/controllers/urls_controller.rb, line 101</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">retrieve_short_url_to_long_url</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:short_url</span>]<span class="ruby-operator">==</span><span class="ruby-string">&quot;&quot;</span>
     <span class="ruby-identifier">flash</span>[<span class="ruby-value">:Error</span>] = <span class="ruby-string">&quot;Please Enter all Details&quot;</span>
